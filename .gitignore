@@ -31,3 +31,6 @@ nbdist/
 /mview/www/
 /mview/plugins/
 /mview/hooks/
+/gradle/
+/out/
+/oauth2-server/gradle/
