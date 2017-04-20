@@ -1,0 +1,39 @@
+﻿<ngb-tabset #t="ngbTabset">
+  <ngb-tab id="loginTab">
+    <template ngbTabTitle><i class="fa fa-sign-in" aria-hidden="true"></i> <span style="font-size: smaller">로그인</span></template>
+    <template ngbTabContent>
+      <form class="login-form p-2" (submit)="login()">
+        <div class="input-group mb-1">
+          <span class="input-group-addon" id="email-addon" ><i class="fa fa-envelope-o" aria-hidden="true" [ngbTooltip]="tipEmail" placement="right"></i></span>
+          <template #tipEmail>Email 입력해주세요.</template>
+
+          <input type="text" class="form-control form-control-sm" aria-describedby="email-addon"  placeholder="Username" id="username" name="username" value="" [(ngModel)]="model.username" #username maxlength="20" required >
+        </div>
+
+        <div class="input-group mb-1">
+          <span class="input-group-addon" id="password-addon"><i class="fa fa-key" aria-hidden="true"[ngbTooltip]="tipPassword" placement="right"></i></span>
+          <template #tipPassword>Password 입력해주세요.</template>
+
+          <input  type="password" class="form-control form-control-sm"  aria-describedby="password-addon"  placeholder="Password" id="password" name="password" value="" [(ngModel)]="model.password" #password maxlength="20" required >
+        </div>
+
+        <div class="form-check has-success" style="flex: auto">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="checkboxSuccess" value="option1">
+            Remember me
+          </label>
+          <button class="btn btn-outline-success btn-sm" [disabled]="loading">로그인</button>
+        </div>
+
+
+      </form>
+    </template>
+  </ngb-tab>
+  <ngb-tab id="registTab">
+    <template ngbTabTitle><i class="fa fa-registered" aria-hidden="true"></i> <span style="font-size: smaller">사용자 등록</span></template>
+    <template ngbTabContent>
+      <auth-regForm></auth-regForm>
+    </template>
+  </ngb-tab>
+</ngb-tabset>
+
