@@ -1,6 +1,7 @@
 {
   "login": {
-    "title": "Sign in to ng2-admin",
+    "title": "G O G U M A",
+    "sub_title":"Handsontable Spring boot Example",
     "signup_link": "New to ng2-admin? Sign up!",
     "email": "Email",
     "password": "Password",

@@ -7,7 +7,8 @@ import {AuthenticationService} from "./services/authentication.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {UserService} from "./services/user.service";
 import {AlertService} from "../common/services/alert.service";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AppTranslationModule} from "../app.translation.module";
 @NgModule({
   declarations: [
     LoginComponent, RegisterComponent
@@ -16,7 +17,9 @@ import {FormsModule} from "@angular/forms";
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AppTranslationModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthenticationService, UserService, AlertService

@@ -2,6 +2,7 @@ import { Routes, RouterModule }  from '@angular/router';
 
 import { Dashboard } from './dashboard.component';
 import { ModuleWithProviders } from '@angular/core';
+import {AuthGuard} from "../../auth/auth.guard";
 
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [
@@ -10,7 +11,7 @@ export const routes: Routes = [
     component: Dashboard,
     children: [
       //{ path: 'treeview', component: TreeViewComponent }
-    ]
+    ],canActivate: [AuthGuard]
   }
 ];
 

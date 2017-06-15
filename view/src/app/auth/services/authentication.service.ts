@@ -3,18 +3,16 @@ import {Headers, Http, RequestOptions, Response, URLSearchParams} from "@angular
 import "rxjs/add/operator/map";
 import {environment} from "environments/environment";
 import {JwtHelper, tokenNotExpired} from "angular2-jwt";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private router: Router) {
   }
 
   private access_token: string;
-  private expires_in: number;
-  private scope: string;
   private refresh_token: string;
-  private token_type: string;
-  private jti: string;
   jwtHelper: JwtHelper = new JwtHelper();
 
   /**
@@ -43,13 +41,8 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         //access_token, expires_in, scope, refresh_token, token_type, jti
         let data = response.json();
-        this.access_token = data.access_token;
-        this.expires_in = data.expires_in;
-        this.scope = data.scope;
-        this.refresh_token = data.refresh_token;
-        this.token_type = data.token_type;
-        this.jti = data.jti;
-        sessionStorage.setItem("token", this.access_token);
+        sessionStorage.setItem("token", data.access_token);
+        sessionStorage.setItem("refresh_token", data.refresh_token);
         return response;
       });
   }
@@ -59,12 +52,8 @@ export class AuthenticationService {
    */
   logout() {
     sessionStorage.removeItem("token");
-    this.access_token = "";
-    this.expires_in = 0;
-    this.scope = "";
-    this.refresh_token = "";
-    this.token_type = "";
-    this.jti = "";
+    sessionStorage.removeItem("refresh_token");
+    this.router.navigate(['/login']);
   }
 
   /**
@@ -72,48 +61,18 @@ export class AuthenticationService {
    * @returns {string}
    */
   getAccessToken() {
-    return this.access_token;
+    return sessionStorage.getItem("token");
   }
 
-  /**
-   * JWT Expired date
-   * @returns {number}
-   */
-  getExpiresIn() {
-    return this.expires_in;
-  }
-
-  /**
-   * JWT Scope
-   * @returns {string}
-   */
-  getScope() {
-    return this.scope;
-  }
 
   /**
    * JWT Refresh Token
    * @returns {string}
    */
   getRefreshToken() {
-    return this.refresh_token;
+    return  sessionStorage.getItem("refresh_token");
   }
 
-  /**
-   * JWT Token Type
-   * @returns {string}
-   */
-  getTokenType() {
-    return this.token_type;
-  }
-
-  /**
-   * JWT Token ID
-   * @returns {string}
-   */
-  getJti() {
-    return this.jti;
-  }
 
   /**
    * Login flag
@@ -148,5 +107,16 @@ export class AuthenticationService {
    */
   isTokenExpired(token) {
     return this.jwtHelper.isTokenExpired(token);
+  }
+
+  private jwt() {
+    // create authorization header with jwt token
+    let headers = new Headers({
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept": "application/json; charset=utf-8",
+      "x-auth-token": this.getAccessToken()
+    });
+
+    return new RequestOptions({ headers: headers });
   }
 }

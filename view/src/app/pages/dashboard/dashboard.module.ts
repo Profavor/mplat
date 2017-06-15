@@ -7,6 +7,7 @@ import { NgaModule } from '../../theme/nga.module';
 import { Dashboard } from './dashboard.component';
 import { routing }       from './dashboard.routing';
 import {HotTableModule} from "ng2-handsontable";
+import {AuthGuard} from "../../auth/auth.guard";
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {HotTableModule} from "ng2-handsontable";
     Dashboard
   ],
   providers: [
+    AuthGuard
   ]
 })
 export class DashboardModule {}
