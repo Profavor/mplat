@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import * as Handsontable from 'handsontable/dist/handsontable.full.js';
+import {AlertService} from "../../common/services/alert.service";
+import {HandsontableService} from "../../common/components/handsontable/service/handsontable.service";
 
 @Component({
   selector: 'dashboard',
@@ -11,6 +13,7 @@ export class Dashboard {
   private data: any[] = getBasicData();
   private colHeaders: string[] = ['ID', 'First Name', 'Last Name', 'Address',
     'Favorite food', 'Price', 'Is active'];
+
   private columns: any[] = [
     {
       data: 'id'
@@ -56,12 +59,37 @@ export class Dashboard {
     ]
   };
 
+  constructor(
+    private handsontableService: HandsontableService,
+    private alertService: AlertService) { }
+
   private afterChange(e: any) {
     console.log(e);
+
+
+    if(e[1] === 'edit'){
+      this.save(null, null, "COL", e);
+    }
   }
 
-  private afterOnCellMouseDown(e: any) {
-    console.log(e);
+
+
+  save(headerList, recordList, saveType, parameter){
+    this.handsontableService.save(headerList, recordList, saveType, parameter)
+      .subscribe(
+        response => {
+          let data = response.json();
+          if(data.success){
+            this.alertService.success(data.message);
+          }else{
+            this.alertService.error(data.message);
+          }
+        },
+        error => {
+          this.alertService.error('Login Failure');
+        });
+
+
   }
 }
 

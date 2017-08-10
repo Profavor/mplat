@@ -2,6 +2,10 @@ package com.favorsoft.apps.mdm.services;
 
 import com.favorsoft.apps.mdm.entity.Prop;
 import com.favorsoft.apps.mdm.repository.PropRepository;
+import com.favorsoft.components.handsontable.models.HandsontableSaveModel;
+import com.favorsoft.components.handsontable.models.HandsontableSaveType;
+import com.favorsoft.components.handsontable.services.HandsontableService;
+import com.favorsoft.components.handsontable.services.impl.HandsontableServiceImpl;
 import com.favorsoft.exceptions.CoreException;
 import org.javers.core.Javers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +17,25 @@ import java.util.List;
  * Created by profa on 2017-06-15.
  */
 @Service
-public class PropService {
-    private final Javers javers;
-    private final PropRepository propRepository;
+public class PropService extends HandsontableServiceImpl<Prop>{
+    @Autowired
+    private Javers javers;
 
     @Autowired
-    public PropService(Javers javers, PropRepository propRepository){
-        this.javers = javers;
-        this.propRepository = propRepository;
-    }
+    private PropRepository propRepository;
 
     public List<Prop> getAll(){
         return propRepository.findAll();
     }
 
-    public boolean save(Prop prop){
+    public boolean save(HandsontableSaveModel save){
         boolean flag = false;
         try{
+            Prop prop = new Prop();
+            if(HandsontableSaveType.COL.name().equalsIgnoreCase(save.getSaveType())){
+                this.save(HandsontableSaveType.COL, save);
+            }
+
             propRepository.save(prop);
             javers.commit("author", prop);
             flag = true;
@@ -38,4 +44,5 @@ public class PropService {
         }
         return flag;
     }
+
 }

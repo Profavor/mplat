@@ -12,6 +12,10 @@ export const routes: Routes = [
     loadChildren: 'app/auth/auth.module#AuthModule'
   },
   {
+    path: 'register',
+    loadChildren: 'app/auth/auth.module#AuthModule'
+  },
+  {
     path: 'pages',
     component: Pages,
     children: [

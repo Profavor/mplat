@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <hotTable [data]="data"
-              (after-change)="afterChange($event)"
-              (after-on-cell-mouse-down)="afterOnCellMouseDown($event)"
+              (afterChange)="afterChange($event)"
               [colHeaders]="colHeaders"
               [columns]="columns"
               [options]="options"

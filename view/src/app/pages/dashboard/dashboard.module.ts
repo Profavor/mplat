@@ -8,6 +8,8 @@ import { Dashboard } from './dashboard.component';
 import { routing }       from './dashboard.routing';
 import {HotTableModule} from "ng2-handsontable";
 import {AuthGuard} from "../../auth/auth.guard";
+import {HandsontableService} from "../../common/components/handsontable/service/handsontable.service";
+import {AuthenticationService} from "../../auth/services/authentication.service";
 
 @NgModule({
   imports: [
@@ -22,7 +24,7 @@ import {AuthGuard} from "../../auth/auth.guard";
     Dashboard
   ],
   providers: [
-    AuthGuard
+    AuthGuard, HandsontableService, AuthenticationService
   ]
 })
 export class DashboardModule {}

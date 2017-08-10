@@ -2,6 +2,7 @@ package com.favorsoft.apps.mdm.prop;
 
 import com.favorsoft.apps.mdm.entity.Prop;
 import com.favorsoft.apps.mdm.services.PropService;
+import com.favorsoft.components.handsontable.models.HandsontableSaveModel;
 import com.favorsoft.exceptions.CoreException;
 import com.favorsoft.utils.CommonUtil;
 import com.favorsoft.web.models.AjaxResponseModel;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/mdm/prop")
-public class PropController {
+public class PropController{
     private final Javers javers;
 
     @Autowired
@@ -47,10 +48,10 @@ public class PropController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public AjaxResponseModel save(@ModelAttribute Prop prop){
+    public AjaxResponseModel save(@ModelAttribute HandsontableSaveModel save){
         AjaxResponseModel ajaxResponseModel = new AjaxResponseModel();
         try{
-            ajaxResponseModel.setSuccess(propService.save(prop));
+            ajaxResponseModel.setSuccess(propService.save(save));
         }catch (CoreException e){
             ajaxResponseModel.setMessage(e.getErrorMessage());
             ajaxResponseModel.setStacktrace(CommonUtil.getRootCauseStackTrace(e));
