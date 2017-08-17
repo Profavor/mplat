@@ -2,7 +2,9 @@
 import {Router} from '@angular/router';
 import {UserService} from "../services/user.service";
 import {AlertService} from "../../common/services/alert.service";
-import {FormGroup} from "@angular/forms";
+import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {User} from "../models/user";
+
 
 
 @Component({
@@ -12,19 +14,28 @@ import {FormGroup} from "@angular/forms";
 })
 
 export class RegisterComponent {
-  model: any = {};
   loading = false;
-
-  public form:FormGroup;
+  user: User = new User();
+  public regForm:FormGroup;
 
   constructor(private router: Router,
               private userService: UserService,
               private alertService: AlertService) {
+    this.regForm = new FormGroup({
+      'loginId': new FormControl(this.user.loginId, [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      'password': new FormControl(this.user.password,  Validators.required),
+      'confirmPassword': new FormControl(this.user.confirmPassword, Validators.required),
+      'email': new FormControl(this.user.email, Validators.required),
+      'agree': new FormControl(this.user.agree)
+    });
   }
 
   register() {
     this.loading = true;
-    this.userService.create(this.model)
+    this.userService.create(this.user)
       .subscribe(
         data => {
           this.alertService.success('Registration successful', true);
@@ -34,13 +45,5 @@ export class RegisterComponent {
           this.alertService.error(error);
           this.loading = false;
         });
-  }
-
-  public onSubmit(values: Object): void {
-    this.loading = true;
-    if (this.form.valid) {
-      // your code goes here
-      // console.log(values);
-    }
   }
 }

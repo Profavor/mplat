@@ -67,14 +67,15 @@ $hoverlink: darken($activelink, 20%);
 
   $mainBgUrl: $assets-root + $images-root + 'sky-bg.jpg';
 
-  &::before {
-    content: '';
+    &::before {
+      content: '';
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    background: url($mainBgUrl) no-repeat center center;
+    //background: url($mainBgUrl) no-repeat center center;
+      background-color: #ffffff;
     background-size: cover;
     will-change: transform;
     z-index: 0;

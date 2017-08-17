@@ -13,9 +13,9 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {AuthenticationService} from "./auth/services/authentication.service";
 import {GlobalState} from "./global.state";
 import {NgaModule} from "./theme/nga.module";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {PagesModule} from "./pages/pages.module";
 import { routing } from './app.routing';
+import 'hammerjs';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -48,7 +48,6 @@ export type StoreType = {
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     NgaModule.forRoot(),
-    NgbModule.forRoot(),
     PagesModule,
     routing
 

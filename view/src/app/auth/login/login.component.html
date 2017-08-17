@@ -1,46 +1,38 @@
-﻿
-<div class="auth-main">
-  <div class="auth-block">
-    <h1 translate>{{'login.title'}}</h1>
-    <a routerLink="/register" class="auth-link" translate>{{'login.sub_title'}}</a>
-
-    <form (submit)="login()"  class="form-horizontal">
-      <div class="form-group row">
-        <label for="username" class="col-sm-2 control-label" translate>{{'login.email'}}</label>
-
-        <div class="col-sm-10">
-           <input type="text" class="form-control form-control-sm" aria-describedby="email-addon"  placeholder="Username" id="username" name="username" value="" [(ngModel)]="model.username" #username maxlength="20" required >
-        </div>
+﻿<div class="ui middle aligned center aligned grid auth-main">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <img src="assets/images/logo.png" class="image">
+      <div class="content">
+        {{'login.title' | translate}}
       </div>
-      <div class="form-group row">
-        <label for="password" class="col-sm-2 control-label" translate>{{'login.password'}}</label>
+    </h2>
+    <form #loginForm="ngForm" (ngSubmit)="login()">
 
-        <div class="col-sm-10">
-          <input  type="password" class="form-control form-control-sm"  aria-describedby="password-addon"  placeholder="Password" id="password" name="password" value="" [(ngModel)]="model.password" #password maxlength="20" required >
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <button  type="submit" class="btn btn-default btn-auth" translate>{{'login.sign_in'}}</button>
-          <button  type="button" class="btn btn-default btn-auth" routerLink="/register"   translate>{{'login.sign_up'}}</button>
-          <a routerLink="/login" class="forgot-pass" translate>{{'login.forgot_password'}}</a>
-        </div>
+        <md-input-container class="full-width">
+          <input mdInput #loginId minlength="4" maxlength="20" required placeholder="Login ID" [(ngModel)]="user.loginId" name="loginId">
+          <md-error><strong>사용자 아이디를 입력해주세요.</strong> </md-error>
+          <md-hint align="end">{{loginId.value.length}} / 20</md-hint>
+        </md-input-container>
+
+        <md-input-container class="full-width">
+          <input mdInput #password type="password" minlength="8" maxlength="32" placeholder="Password" [(ngModel)]="user.password" name="password" required validateEqual="confirmPassword" reverse="true">
+          <md-error><strong>비밀번호를 입력해주세요.</strong> </md-error>
+          <md-hint align="end">{{password.value.length}} / 32</md-hint>
+        </md-input-container>
+      <div class="ui segment">
+        <button type="button" class="ui fluid large teal submit button" [disabled]="!loginForm.valid" (click)="login()">Login</button>
       </div>
     </form>
+
+    <div class="ui message">
+      New to us? <a href="#" (click)="open()">Sign Up</a>
+    </div>
   </div>
 </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>One fine body&hellip;</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+<ng-template let-context let-modal="modal" #modalTemplate>
+  <div class="header">User registration</div>
+  <div class="content">
+   <auth-regForm></auth-regForm>
   </div>
 </ng-template>
