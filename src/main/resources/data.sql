@@ -1,5 +1,5 @@
 --USR(ADMIN)
-insert into usr (USRID, CREATEDDATE, CREATOR, LASTUPDATED, UPDATOR, LOGINID, PASSWORD, isaccountnonexpired, isaccountnonlocked, iscredentialsnonexpired, isenabled) values ('f0193abf528db47301528db547520000', now(), 'SYSTEM', now(), 'SYSTEM', 'admin', 'befac6280d8483bf8befb40efe22b9ad3830b0cdea1bebdcfa409a076ae6eae06de3a04e370a04c0', TRUE, FALSE , TRUE, TRUE );
+insert into usr (USRID, CREATEDDATE, CREATOR, LASTUPDATED, UPDATOR, LOGINID, PASSWORD, isaccountnonexpired, isaccountnonlocked, iscredentialsnonexpired, isenabled) values ('f0193abf528db47301528db547520000', now(), 'SYSTEM', now(), 'SYSTEM', 'admin', '$2a$10$AMzmsivPF4eYT354j0dByecrgwXcOI.OsOTqzekgR7.h3sPTJmKgS', TRUE, FALSE , TRUE, TRUE );
 
 --ROLE(DEFAULT)
 insert into role (ROLEID, CREATOR, CREATEDDATE, UPDATOR, LASTUPDATED) values ('ROLE_USER', 'SYSTEM', now(), 'SYSTEM', now());

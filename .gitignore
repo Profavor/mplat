@@ -34,3 +34,4 @@ nbdist/
 /gradle/
 /out/
 /oauth2-server/gradle/
+/bin/

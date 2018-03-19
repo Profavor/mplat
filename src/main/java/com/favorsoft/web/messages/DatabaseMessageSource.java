@@ -3,7 +3,6 @@ package com.favorsoft.web.messages;
 import com.favorsoft.entity.Dictionary;
 import com.favorsoft.repository.DictinoaryRepository;
 import lombok.Getter;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -18,8 +17,6 @@ import java.util.Map;
  */
 @Component
 public class DatabaseMessageSource {
-    protected final Logger logger = Logger.getLogger(getClass());
-
     private static Map<String, String> cachedProperties = new HashMap<String, String>();
 
     @Getter
@@ -30,9 +27,6 @@ public class DatabaseMessageSource {
 
     private Map<String, String> refreshProperties() {
         synchronized (DatabaseMessageSource.cachedProperties) {
-            if(logger.isDebugEnabled()){
-                logger.debug("Dictionary resource initialize starting...");
-            }
             Collection<Dictionary> dicList = dictinoaryRepository.findAll();
             Map<String, String> dicMap = new HashMap<String, String>();
             for(Dictionary dictionary : dicList){
@@ -45,9 +39,6 @@ public class DatabaseMessageSource {
             cachedProperties.clear();
 
             cachedProperties.putAll(dicMap);
-            if(logger.isDebugEnabled()){
-                logger.debug("Dictionary resource initialize success.");
-            }
             return cachedProperties;
         }
     }

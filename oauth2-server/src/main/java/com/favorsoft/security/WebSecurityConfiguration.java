@@ -4,15 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
+import com.favorsoft.service.UsrService;
 
 /**
  * Created by profa on 2017-02-03.
@@ -23,11 +25,16 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomAuthenticationProvider customAuthenticationProvider;
+    private UsrService usrService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new StandardPasswordEncoder();
+        return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
@@ -35,15 +42,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/oauth/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/oauth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/oauth/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/oauth/**").permitAll()
+                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()               
                 .sessionManagement()
-                .maximumSessions(1)
-                .and()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .maximumSessions(1)
+                    .and()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);              
 
         // disable page caching
         http.headers().cacheControl();
@@ -51,6 +57,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(customAuthenticationProvider);
+        auth
+                .userDetailsService(this.usrService)
+                .passwordEncoder(passwordEncoder());
     }
 }

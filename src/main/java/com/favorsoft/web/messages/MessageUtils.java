@@ -1,6 +1,5 @@
 package com.favorsoft.web.messages;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -15,8 +14,6 @@ import java.util.Locale;
 
 @Component
 public class MessageUtils {
-    protected final Logger logger = Logger.getLogger(getClass());
-
     @Autowired
     private DatabaseMessageSource databaseMessageSource;
 

@@ -1,0 +1,18 @@
+﻿<div class="ui raised very padded text container segment" style="margin-top: 30px;">
+    <h2 class="ui center aligned icon header">
+        <i class="circular users icon"></i>
+        mPlatform
+      </h2>
+
+      <form class="ui form">
+        <div class="field">
+          <label>First Name</label>
+          <input name="loginId" type="text" placeholder="Login ID" [(ngModel)]="user.loginId">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input name="password" type="password" placeholder="Password" [(ngModel)]="user.password">
+        </div>
+        <button class="ui button" type="submit" (click)="login()">Submit</button>
+      </form>
+</div>

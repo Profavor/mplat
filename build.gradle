@@ -1,11 +1,9 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -15,15 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'idea'
 apply plugin: 'io.spring.dependency-management'
-
-idea {
-	module {
-		inheritOutputDirs = false
-		outputDir = file("$buildDir/classes/main/")
-	}
-}
 
 jar {
 	baseName = 'favor'
@@ -47,41 +37,27 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-batch')
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	//compile('org.springframework.boot.experimental:spring-boot-starter-web-reactive')
-	compile('org.springframework.boot:spring-boot-starter-integration')
-	compile('org.springframework.boot:spring-boot-starter-mail')
-	compile('org.springframework.retry:spring-retry')
-	compile('org.springframework.session:spring-session')
-	compile('org.springframework.mobile:spring-mobile-device')
-	compile('org.springframework.boot:spring-boot-starter-social-facebook')
-	compile('org.springframework.boot:spring-boot-starter-social-linkedin')
-	compile('org.springframework.boot:spring-boot-starter-social-twitter')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-websocket')
-	compile("org.springframework.data:spring-data-rest-core")
-	compile("org.springframework.security:spring-security-jwt")
-	compile("org.springframework.security.oauth:spring-security-oauth2")
 	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.session:spring-session:1.3.1.BUILD-SNAPSHOT")
-	compile 'org.javers:javers-core:3.2.0'
-	compile 'org.javers:javers-spring-boot-starter-sql:3.2.0'
-	runtime('org.springframework.boot:spring-boot-devtools')
-
-	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+	compile 'org.javers:javers-core:3.8.4'
+	compile 'org.javers:javers-spring-boot-starter-sql:3.8.4'
+	
+	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.2.1.RELEASE'
+	compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
+	compile group: 'org.springframework.mobile', name: 'spring-mobile-device', version: '2.0.0.M2'
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
-
-	runtime('mysql:mysql-connector-java')
-	//compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'	
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'		
+	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
+	compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+	
 	compileOnly('org.projectlombok:lombok')
+	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
-	// https://mvnrepository.com/artifact/commons-io/commons-io
-	compile group: 'commons-io', name: 'commons-io', version: '2.5'
-
+	
+	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('mysql:mysql-connector-java')
 }
 
