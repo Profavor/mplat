@@ -13,12 +13,23 @@
                     </div>
         </div>
         <div class="twelve wide column">
-                <div class="ui red menu" style="margin-top:5px;" *ngFor="let menu of topMenu.obj">                        
-                        <a class="item active">{{menu.id}}</a>
-                        <div class="right menu">
+                <div class="ui red menu" style="margin-top:5px;">     
+                   <div  *ngFor="let menu of topMenu.obj">
+                        <div *ngFor="let dictionary of menu.dictionary.dictionaryLang">
+                             <a class="item active" *ngIf="dictionary.lang == langCode">{{dictionary.message}}</a>
+                        </div>            
+                   </div>
+                   <div class="right menu">
+                                <div class="ui dropdown item" id="language">
+                                        Language <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                                <a class="item">Korean</a>
+                                                <a class="item">English</a>                    
+                                        </div>
+                                </div>
                                 <a class="item" (click)="logout()">Logout</a>
-                        </div>                 
-                      </div>
+                        </div>     
+                </div>
             </div>
     
 </div>

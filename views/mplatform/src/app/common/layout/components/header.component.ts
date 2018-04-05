@@ -20,26 +20,20 @@ export class HeaderComponent {
     private alertService: AlertService,
     private translate: TranslateService
   ) {
+    this.langCode = this.translate.getBrowserLang().toUpperCase();
   }
 
   topMenu: any = new Array();
+  langCode: string;
 
   ngOnInit() {
-    $('.menu .browse')
-      .popup({
-        inline     : true,
-        hoverable  : true,
-        position   : 'bottom left',
-        delay: {
-          show: 300,
-          hide: 800
-        }
-      });
-
       this.getTopMenu();
-      console.log(this.translate.getBrowserLang());
-  }
 
+      $('.ui.dropdown')
+        .dropdown({
+          transition: 'drop'
+        });
+  }
   getTopMenu(){
     this.menuService.getTopMenu()
     .subscribe(

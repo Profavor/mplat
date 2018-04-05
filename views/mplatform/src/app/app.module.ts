@@ -11,7 +11,6 @@ import { routing } from './app.routing';
 import {PagesModule} from "./pages/pages.module";
 import {HttpModule} from '@angular/http';
 import {TranslateModule} from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 
 const APP_PROVIDERS = [
   AppState,
