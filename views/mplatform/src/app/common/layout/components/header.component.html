@@ -1,0 +1,24 @@
+<div class="ui grid" style="background-color: #f3f3f3">
+        <div class="four wide column">
+                <div class="logo-group" style="width:244px; float: left;">
+                        <span>
+                            <h3 class="ui header" style="padding-top:10px; padding-left: 5px;">
+                            <i class="settings icon"></i>
+                                <div class="content">
+                                        mPlatform
+                                <div class="sub header">Better devlopment</div>                
+                                </div>
+                            </h3>
+                        </span>    
+                    </div>
+        </div>
+        <div class="twelve wide column">
+                <div class="ui red menu" style="margin-top:5px;" *ngFor="let menu of topMenu.obj">                        
+                        <a class="item active">{{menu.id}}</a>
+                        <div class="right menu">
+                                <a class="item" (click)="logout()">Logout</a>
+                        </div>                 
+                      </div>
+            </div>
+    
+</div>

@@ -84,7 +84,7 @@ public class TokenUtil {
         try {
             claims = Jwts.parser()
                     .setSigningKey(this.secret)
-                    .parseClaimsJws(token)
+                    .parseClaimsJws(token)            
                     .getBody();
         } catch (Exception e) {
             claims = null;

@@ -5,19 +5,12 @@ import {AuthGuard} from "../auth/auth.guard";
 
 export const routes: Routes = [
   {
-
     path: 'login',
-
     loadChildren: 'app/auth/auth.module#AuthModule'
-
   },
-
   {
-
     path: 'register',
-
     loadChildren: 'app/auth/auth.module#AuthModule'
-
   },
   {
     path: 'pages',

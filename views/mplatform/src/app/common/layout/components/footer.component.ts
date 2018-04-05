@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 
 @Component({
-  selector: 'pages',
-  templateUrl: 'pages.component.html',
-  styleUrls: ['pages.component.css']
+  selector: 'footer',
+  templateUrl: 'footer.component.html',
+  styleUrls: ['footer.component.css']
 })
-export class Pages {
+export class FooterComponent {
 
   constructor() {
   }

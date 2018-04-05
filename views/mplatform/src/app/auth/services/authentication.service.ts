@@ -1,5 +1,6 @@
 ﻿import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, Response, URLSearchParams} from "@angular/http";
+import { HttpHeaders } from '@angular/common/http';
 import "rxjs/add/operator/map";
 import {environment} from "../../../environments/environment";
 import {JwtHelper, tokenNotExpired} from "angular2-jwt";
@@ -111,12 +112,16 @@ export class AuthenticationService {
 
   jwt() {
     // create authorization header with jwt token
-    let headers = new Headers({
+    let headers = new HttpHeaders({
       "Content-Type": "application/x-www-form-urlencoded",
       "Accept": "application/json; charset=utf-8",
       "x-auth-token": this.getAccessToken()
     });
 
-    return new RequestOptions({ headers: headers });
+    const httpOptions = {
+      headers: headers
+    };
+
+    return httpOptions;
   }
 }

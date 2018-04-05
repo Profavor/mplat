@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 
 @Component({
-  selector: 'pages',
-  templateUrl: 'pages.component.html',
-  styleUrls: ['pages.component.css']
+  selector: 'left-side',
+  templateUrl: 'leftside.component.html',
+  styleUrls: ['leftside.component.css']
 })
-export class Pages {
+export class LeftsideComponent {
 
   constructor() {
   }

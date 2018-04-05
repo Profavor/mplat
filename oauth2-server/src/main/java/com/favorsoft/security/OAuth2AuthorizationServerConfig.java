@@ -1,6 +1,7 @@
 package com.favorsoft.security;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 
 import javax.sql.DataSource;
 
@@ -41,8 +42,9 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 	
 	@Bean
 	public JwtAccessTokenConverter jwtAccessTokenConverter() throws UnsupportedEncodingException {
+		byte[] key = Base64.getDecoder().decode(this.secret);
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey(secret);
+		converter.setSigningKey(new String(key));
 		return converter;
 	}
 
