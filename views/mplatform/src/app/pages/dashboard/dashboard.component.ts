@@ -4,7 +4,7 @@ declare var $ :any;
 
 @Component({
   selector: 'dashboard',
-  styleUrls: ['./dashboard.scss'],
+  styleUrls: ['./dashboard.css'],
   templateUrl: './dashboard.html'
 })
 export class Dashboard implements OnInit{
