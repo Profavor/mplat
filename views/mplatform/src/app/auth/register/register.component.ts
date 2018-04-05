@@ -10,7 +10,7 @@ import {User} from "../models/user";
 @Component({
   selector: 'auth-regForm',
   templateUrl: 'register.component.html',
-  styleUrls: ['register.component.scss']
+  styleUrls: ['register.component.css']
 })
 
 export class RegisterComponent {
