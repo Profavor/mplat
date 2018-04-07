@@ -17,7 +17,8 @@ export const routes: Routes = [
     component: Pages,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-      { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' }
+      { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+      { path: 'admin/settings/dictionary', loadChildren: './admin/dictionary/dictionary.module#DictionaryModule' }
     ]
   }
 ];

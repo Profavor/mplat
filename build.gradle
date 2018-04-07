@@ -16,9 +16,18 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 jar {
-	baseName = 'favor'
+	baseName = 'mplat'
 	version = '0.0.1-SNAPSHOT'
+	manifest {
+		attributes 'Title': 'FavorApplication', 'Version': version, 'Main-Class': 'com.favorsoft.FavorApplication'
 }
+    archiveName 'oauth2.jar'
+    dependsOn configurations.runtime
+    from {
+      configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+     }
+}
+
 
 sourceCompatibility = 1.8
 

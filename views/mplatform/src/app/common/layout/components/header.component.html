@@ -13,21 +13,23 @@
                     </div>
         </div>
         <div class="twelve wide column">
-                <div class="ui red menu" style="margin-top:5px;">     
-                   <div  *ngFor="let menu of topMenu.obj">
-                        <div *ngFor="let dictionary of menu.dictionary.dictionaryLang">
-                             <a class="item active" *ngIf="dictionary.lang == langCode">{{dictionary.message}}</a>
-                        </div>            
-                   </div>
+                <div class="ui small red menu" style="margin-top:5px;">     
+                   <header-menu *ngFor="let menu of topMenu.obj" [menu]="menu" [langCode]="langCode"></header-menu>
                    <div class="right menu">
                                 <div class="ui dropdown item" id="language">
-                                        Language <i class="dropdown icon"></i>
+                                        <i class="world icon"></i>Language <i class="dropdown icon"></i>
                                         <div class="menu">
-                                                <a class="item">Korean</a>
-                                                <a class="item">English</a>                    
+                                                <a class="item" (click)="setLanguage('KO')"><i class="kr flag"></i>한국어</a>
+                                                <a class="item" (click)="setLanguage('EN')"><i class="us flag"></i>English</a> 
                                         </div>
                                 </div>
-                                <a class="item" (click)="logout()">Logout</a>
+
+                                <div class="ui dropdown item" id="setting">
+                                        <i class="settings icon"></i>Settings <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                                <a class="item" routerLink="admin/settings/dictionary">다국어설정</a>                                       
+                                        </div>
+                                </div>
                         </div>     
                 </div>
             </div>

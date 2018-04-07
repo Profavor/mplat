@@ -21,11 +21,15 @@
       "styles": [
         "../semantic/dist/semantic.css",
         "../node_modules/ngx-toastr/toastr.css",
+        "../node_modules/datatables/media/css/jquery.dataTables.min.css",
+        "assets/css/datatables.semantic-ui.css",
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
-        "../semantic/dist/semantic.js"
+        "../semantic/dist/semantic.js",
+        "../node_modules/datatables/media/js/jquery.dataTables.min.js",
+        "assets/js/datatables.semantic-ui.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

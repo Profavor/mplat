@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Routes } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 import {AuthenticationService} from '../../../auth/services/authentication.service';
 import {MenuService} from "../services/menu.service";
 import {AlertService} from "../../services/alert.service";
 import {TranslateService} from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 declare var $: any;
 
@@ -12,19 +13,21 @@ declare var $: any;
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   constructor(
     private authenticationService: AuthenticationService,
     private menuService: MenuService,
     private alertService: AlertService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private location: Location,
+    private router: Router
   ) {
     this.langCode = this.translate.getBrowserLang().toUpperCase();
   }
 
   topMenu: any = new Array();
-  langCode: string;
+  langCode: string = localStorage.getItem('langCode');
 
   ngOnInit() {
       this.getTopMenu();
@@ -34,6 +37,12 @@ export class HeaderComponent {
           transition: 'drop'
         });
   }
+
+  setLanguage(lang:string){
+    localStorage.setItem('langCode', lang);
+    this.langCode = lang;
+  }
+
   getTopMenu(){
     this.menuService.getTopMenu()
     .subscribe(

@@ -11,6 +11,7 @@ export class AppComponent {
 
   constructor(private _state: GlobalState,
     translate: TranslateService) {
+      localStorage.setItem("langCode", translate.getBrowserLang().toUpperCase());
      // this language will be used as a fallback when a translation isn't found in the current language
      //translate.setDefaultLang('ko');
 
