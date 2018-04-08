@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
 import {AlertService} from "../../../common/services/alert.service";
 declare var $ :any;
 
@@ -7,13 +7,20 @@ declare var $ :any;
   styleUrls: ['./dictionary.css'],
   templateUrl: './dictionary.html'
 })
-export class DictionaryComponent implements OnInit{
- 
+export class DictionaryComponent implements OnInit, AfterViewInit{
+  @Input() popup: string;
+
+  test:string = 'SYS0001';
+
   constructor(
     private alertService: AlertService) { }
 
     ngOnInit()
     {
      
+    }
+
+    ngAfterViewInit(){
+
     }
   }

@@ -48,7 +48,6 @@ export class HeaderComponent implements OnInit{
     .subscribe(
       response => {  
         this.topMenu = response; 
-        console.log(this.topMenu);
         if(!this.topMenu.success){
           this.alertService.error(this.topMenu.message);
         }

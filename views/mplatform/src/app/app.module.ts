@@ -11,6 +11,7 @@ import { routing } from './app.routing';
 import {PagesModule} from "./pages/pages.module";
 import {HttpModule} from '@angular/http';
 import {TranslateModule} from '@ngx-translate/core';
+import {SharedPipesModule} from './common/pipes/shared-pipes.module';
 
 const APP_PROVIDERS = [
   AppState,
@@ -29,8 +30,8 @@ const APP_PROVIDERS = [
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot()
-
+    TranslateModule.forRoot(),
+    SharedPipesModule.forRoot()
   ],
   providers: [APP_PROVIDERS, AlertService],
   bootstrap: [AppComponent]

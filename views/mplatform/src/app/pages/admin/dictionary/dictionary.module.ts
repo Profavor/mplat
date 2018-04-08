@@ -5,11 +5,13 @@ import { DictionaryComponent } from './dictionary.component';
 import { routing }       from './dictionary.routing';
 import {AdminGuard} from "../../../auth";
 import {AuthenticationService} from "../../../auth/services/authentication.service";
+import {SharedPipesModule} from "../../../common/pipes/shared-pipes.module";
 
 @NgModule({
   imports: [
     CommonModule,
-    routing
+    routing,
+    SharedPipesModule
   ],
   declarations: [
     DictionaryComponent
