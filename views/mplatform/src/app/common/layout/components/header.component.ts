@@ -41,6 +41,8 @@ export class HeaderComponent implements OnInit{
   setLanguage(lang:string){
     localStorage.setItem('langCode', lang);
     this.langCode = lang;
+    this.router.navigated = false;
+    this.router.navigateByUrl(this.router.url);
   }
 
   getTopMenu(){

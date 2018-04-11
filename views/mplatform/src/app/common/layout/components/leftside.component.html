@@ -8,26 +8,11 @@
                     <button class="ui button" data-position="bottom left" data-tooltip="Add users to your feed"><i class="save icon"></i></button>
                     <button class="ui button" data-position="bottom left" data-tooltip="Add users to your feed"><i class="upload icon"></i></button>
                     <button class="ui button" data-position="bottom left" data-tooltip="Add users to your feed"><i class="download icon"></i></button>
-                    <button class="ui button" data-position="bottom left" data-tooltip="Logout"><i class="sign out alternate icon"></i></button> 
+                    <button class="ui button" data-position="bottom left" data-tooltip="Logout" (click)="logout()"><i class="sign out alternate icon"></i></button> 
                   </div>
         </div>
         <div class="ui vertical pointing menu">
-                <div class="item">
-                    <div class="ui transparent icon input">
-                        <h4>API</h4>
-                    </div>
-                </div>
-                    
-                <a class="item">
-                    Dashboard1
-                </a>
-                <a class="item active">
-                    Dashboard2
-                    <div class="ui label">51</div>
-                </a>
-                <a class="item">
-                    Dashboard3
-                </a>
-            </div>
+            <menu-item *ngFor="let menu of sideMenu.obj" [menu]="menu" [langCode]="langCode"></menu-item>
+        </div>
 
 </div>

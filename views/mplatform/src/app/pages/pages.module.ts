@@ -7,7 +7,7 @@ import { routing }       from './pages.routing';
 import { Pages } from './pages.component';
 import {AuthGuard} from "../auth/auth.guard";
 import {AuthenticationService} from "../auth/services/authentication.service";
-import {HeaderComponent, LeftsideComponent, FooterComponent, HeaderMenuComponent} from "../common/layout";
+import {HeaderComponent, LeftsideComponent, FooterComponent, MenuComponent} from "../common/layout";
 import {MenuService} from "../common/layout/services/menu.service";
 
 @NgModule({
@@ -16,7 +16,7 @@ import {MenuService} from "../common/layout/services/menu.service";
     routing,
     HttpClientModule
   ],
-  declarations: [Pages, HeaderComponent, LeftsideComponent, FooterComponent, HeaderMenuComponent],
+  declarations: [Pages, HeaderComponent, LeftsideComponent, FooterComponent, MenuComponent],
   providers: [AuthGuard, AuthenticationService, MenuService]
 })
 export class PagesModule {

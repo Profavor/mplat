@@ -17,11 +17,20 @@ export class MenuService {
     getTopMenu(){
         const url = '/api/menu/getTopMenu';
         const param =  new HttpParams();
-        param.set('test', 'test');
-        
+
         return this.http.post(url, param, this.authenticationService.jwt())
             .pipe(      
                 retry(3)
-            );
-        }
+        );
     }
+
+    getSideMenu(path:string){
+        const url = '/api/menu/getSideMenu';
+        const param =  new HttpParams().set("path", path);
+
+        return this.http.post(url, param, this.authenticationService.jwt())
+            .pipe(      
+                retry(3)
+        );
+    }
+}
