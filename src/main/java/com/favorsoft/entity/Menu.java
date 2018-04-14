@@ -50,4 +50,6 @@ public class Menu extends BaseEntity implements Serializable {
 	
 	private int dispSeq;	
 	
+	private String domain;
+	
 }

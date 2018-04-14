@@ -15,5 +15,5 @@ public interface SubMenuRepository extends JpaRepository<SubMenu, String> {
 	
 	public Optional<SubMenu> findByPath(String path);
 	
-	public Optional<SubMenu> findByMenu(Optional<Menu> menu);
+	public Optional<SubMenu> findByMenuAndParentId(Optional<Menu> menu, String parentId);
 }

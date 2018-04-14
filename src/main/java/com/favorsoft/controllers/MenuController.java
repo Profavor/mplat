@@ -48,12 +48,12 @@ public class MenuController {
 	
 	@RequestMapping(value="/getSideMenu", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxModel<Collection<Optional<SubMenu>>> getSideMenu(@RequestParam(name="path", defaultValue="/") String path) {		
+	public AjaxModel<Collection<Optional<SubMenu>>> getSideMenu(@RequestParam(name="path", defaultValue="") String path) {		
 		AjaxModel<Collection<Optional<SubMenu>>> ajaxModel = new AjaxModel<>();		
 		try {
 			Optional<Menu> menu = menuRepository.findByPath(path);			
 			if(menu.isPresent()) {
-				Optional<SubMenu> submenu = subMenuRepository.findByMenu(menu);
+				Optional<SubMenu> submenu = subMenuRepository.findByMenuAndParentId(menu, null);
 				if(submenu.isPresent()) {
 					ajaxModel.setObj(subMenuRepository.findByParentId(submenu.get().getId()));	
 				}				

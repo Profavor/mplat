@@ -13,4 +13,6 @@ public interface MenuRepository extends JpaRepository<Menu, String> {
 	public Collection<Optional<Menu>> findByParentId(String parentId);
 	
 	public Optional<Menu> findByPath(String path);
+	
+	public Optional<Menu> findByDomain(String domain);
 }
