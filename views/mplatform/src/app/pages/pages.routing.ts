@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/core';
 import {AuthGuard} from "../auth/auth.guard";
 
 export const routes: Routes = [
-  {
+ {
     path: 'login',
     loadChildren: 'app/auth/auth.module#AuthModule'
   },
@@ -18,7 +18,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-      { path: 'admin/settings/dictionary', loadChildren: './admin/dictionary/dictionary.module#DictionaryModule' }
+      { path: 'admin/settings/dictionary', loadChildren: './admin/dictionary/dictionary.module#DictionaryModule' },
+      { path: 'coffee', loadChildren: './coffee/coffee.module#CoffeeModule' }
     ]
   }
 ];

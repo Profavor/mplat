@@ -17,7 +17,7 @@ declare var $: any;
     </div>
     <div *ngIf="menu.childMenu.length == 0">
       <div *ngFor="let lang of menu.dictionary.dictionaryLang"> 
-        <a class="item" *ngIf="lang.lang == langCode">{{lang.message}}</a>
+        <a class="item" *ngIf="lang.lang == langCode" routerLink="{{menu.path}}" routerLinkActive="active">{{lang.message}}</a>
       </div> 
     </div>
   `
