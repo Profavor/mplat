@@ -11,11 +11,11 @@ export class AppComponent {
 
   constructor(private _state: GlobalState,
     translate: TranslateService) {
-      localStorage.setItem("langCode", translate.getBrowserLang().toUpperCase());
+      localStorage.setItem('langCode', translate.getBrowserLang().toUpperCase());
      // this language will be used as a fallback when a translation isn't found in the current language
-     //translate.setDefaultLang('ko');
+     // translate.setDefaultLang('ko');
 
      // the lang to use, if the lang isn't available, it will use the current loader to get them
-     //translate.use('ko');
+     // translate.use('ko');
   }
 }

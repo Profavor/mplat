@@ -1,14 +1,12 @@
 ﻿import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from "../services/user.service";
-import {AlertService} from "../../common/services/alert.service";
-import {FormGroup, FormControl, Validators} from "@angular/forms";
-import {User} from "../models/user";
-
-
+import {UserService} from '../services/user.service';
+import {AlertService} from '../../common/services/alert.service';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {User} from '../models/user';
 
 @Component({
-  selector: 'auth-regForm',
+  selector: 'app-auth-reg-form',
   templateUrl: 'register.component.html',
   styleUrls: ['register.component.css']
 })
@@ -16,7 +14,7 @@ import {User} from "../models/user";
 export class RegisterComponent {
   loading = false;
   user: User = new User();
-  public regForm:FormGroup;
+  public regForm: FormGroup;
 
   constructor(private router: Router,
               private userService: UserService,

@@ -1,37 +1,37 @@
-<div class="ui grid" style="background-color: #f3f3f3">
-        <div class="four wide column">
-                <div class="logo-group" style="width:244px; float: left;">
-                        <span>
-                            <h3 class="ui header" style="padding-top:10px; padding-left: 5px;">
-                            <i class="settings icon"></i>
-                                <div class="content">
-                                        mPlatform
-                                <div class="sub header">Better devlopment</div>                
-                                </div>
-                            </h3>
-                        </span>    
-                    </div>
-        </div>
-        <div class="twelve wide column">
-                <div class="ui small red menu" style="margin-top:5px;">     
-                   <menu-item *ngFor="let menu of topMenu.obj" [menu]="menu" [langCode]="langCode"></menu-item>
-                   <div class="right menu">
-                                <div class="ui dropdown item" id="language">
-                                        <i class="world icon"></i>Language <i class="dropdown icon"></i>
-                                        <div class="menu">
-                                                <a class="item" (click)="setLanguage('KO')"><i class="kr flag"></i>한국어</a>
-                                                <a class="item" (click)="setLanguage('EN')"><i class="us flag"></i>English</a> 
-                                        </div>
-                                </div>
-
-                                <div class="ui dropdown item" id="setting">
-                                        <i class="settings icon"></i>Settings <i class="dropdown icon"></i>
-                                        <div class="menu">
-                                                <a class="item" routerLink="admin/settings/dictionary">다국어설정</a>                                       
-                                        </div>
-                                </div>
-                        </div>     
+<div style="padding:5px;">
+        <div class="logo-group" style="width:220px; float: left;">
+        <span>
+                <h3 class="ui header">
+                <i class="settings icon"></i>
+                <div class="content">
+                        mPlatform
+                <div class="sub header">Better devlopment</div>                
                 </div>
-            </div>
-    
+                </h3>
+        </span>    
+        </div>
+</div>
+
+<div style="margin-left:220px; position: relative;">
+    <div style="margin-top:-5px; margin-right:5px;">
+        <div class="ui small red menu">     
+                <menu-item *ngFor="let menu of topMenu.obj" [menu]="menu" [langCode]="langCode"></menu-item>
+                <div class="right menu">
+                        <div class="ui dropdown item" id="language">
+                                <i class="world icon"></i>Language <i class="dropdown icon"></i>
+                                <div class="menu">
+                                        <a class="item" (click)="setLanguage('KO')"><i class="kr flag"></i>한국어</a>
+                                        <a class="item" (click)="setLanguage('EN')"><i class="us flag"></i>English</a> 
+                                </div>
+                        </div>
+
+                        <div class="ui dropdown item" id="setting">
+                                <i class="settings icon"></i>Settings <i class="dropdown icon"></i>
+                                <div class="menu">
+                                        <a class="item" routerLink="admin/settings/dictionary">다국어설정</a>                                       
+                                </div>
+                        </div>
+                </div>     
+        </div>
+    </div>
 </div>

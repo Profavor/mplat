@@ -1,25 +1,23 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {AlertService} from "../../common/services/alert.service";
-declare var $ :any;
+import {AlertService} from '../../common/services/alert.service';
+declare var $: any;
 
 @Component({
-  selector: 'coffee',
+  selector: 'app-coffee',
   styleUrls: ['./coffee.css'],
   templateUrl: './coffee.html'
 })
-export class CoffeeComponent implements OnInit, AfterViewInit{
- 
+export class CoffeeComponent implements OnInit, AfterViewInit {
   constructor(
     private alertService: AlertService) { }
 
-    ngOnInit()
-    {
-     
-    }
+  ngOnInit() {
 
-    ngAfterViewInit(){
-      $('.ui.dropdown')
-        .dropdown()
-      ;
-    }
   }
+
+  ngAfterViewInit() {
+    $('.ui.dropdown')
+      .dropdown()
+    ;
+  }
+}

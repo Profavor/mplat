@@ -1,14 +1,13 @@
-﻿import {Injectable} from "@angular/core";
-import {Headers, Http, RequestOptions, Response, URLSearchParams} from "@angular/http";
-import { HttpHeaders } from '@angular/common/http';
-import "rxjs/add/operator/map";
-import {environment} from "../../../environments/environment";
-import {JwtHelper, tokenNotExpired} from "angular2-jwt";
-import {Router} from "@angular/router";
+﻿import {Injectable} from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, retry, map } from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
               private router: Router) {
   }
 
@@ -23,37 +22,34 @@ export class AuthenticationService {
    * @returns {Observable<R>}
    */
   login(username: string, password: string) {
-    let params: URLSearchParams = new URLSearchParams();
-    let headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Accept": "application/json",
-      "Authorization": "Basic " + btoa(environment.oauth2_clientId + ':' + environment.oauth2_secret)
+    // create authorization header with jwt token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json',
+      'Authorization': 'Basic ' + btoa(environment.oauth2_clientId + ':' + environment.oauth2_secret)
     });
 
-    let options = new RequestOptions({headers: headers});
-    params.set('username', username);
-    params.set('password', password);
-    params.set('grant_type', 'password');
-    params.set('scope', 'read');
-    params.set('redirect_uri', '/');
+    const httpOptions = {
+      headers: headers
+    };
 
-    return this.http.post('/oauth/token', params, options)
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        //access_token, expires_in, scope, refresh_token, token_type, jti
-        let data = response.json();
-        localStorage.setItem("access_token", data.access_token);
-        localStorage.setItem("refresh_token", data.refresh_token);
-        return response;
-      });
+    const params =  new HttpParams()
+    .set('username', username)
+    .set('password', password)
+    .set('grant_type', 'password')
+    .set('scope', 'read')
+    .set('redirect_uri', '/');
+
+    return this.http.post('/oauth/token', params, httpOptions)
+      .pipe( retry(3));
   }
 
   /**
    * Authorization Logout Process
    */
   logout() {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     this.router.navigate(['/login']);
   }
 
@@ -62,7 +58,7 @@ export class AuthenticationService {
    * @returns {string}
    */
   getAccessToken() {
-    return localStorage.getItem("access_token");
+    return localStorage.getItem('access_token');
   }
 
 
@@ -71,7 +67,7 @@ export class AuthenticationService {
    * @returns {string}
    */
   getRefreshToken() {
-    return  localStorage.getItem("refresh_token");
+    return  localStorage.getItem('refresh_token');
   }
 
 
@@ -112,10 +108,10 @@ export class AuthenticationService {
 
   jwt() {
     // create authorization header with jwt token
-    let headers = new HttpHeaders({
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Accept": "application/json; charset=utf-8",
-      "x-auth-token": this.getAccessToken()
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json; charset=utf-8',
+      'x-auth-token': this.getAccessToken()
     });
 
     const httpOptions = {

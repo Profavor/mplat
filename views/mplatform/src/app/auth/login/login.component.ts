@@ -1,24 +1,25 @@
-﻿import {Component, OnInit, ViewChild} from "@angular/core";
-import {AuthenticationService} from "../services/authentication.service";
-import {AlertService} from "../../common/services/alert.service";
-import {Router} from "@angular/router";
-import {FormGroup, FormControl, Validators} from "@angular/forms";
-import {User} from "../models/user";
-import {RegisterComponent} from "../register/register.component"
+﻿import {Component, OnInit, ViewChild} from '@angular/core';
+import {AuthenticationService} from '../services/authentication.service';
+import {AlertService} from '../../common/services/alert.service';
+import {Router} from '@angular/router';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {User} from '../models/user';
+import {RegisterComponent} from '../register/register.component';
 
 export interface IContext {
-  data:string;
+  data: string;
 }
 
 @Component({
-  selector: 'auth-loginForm',
+  selector: 'app-login-form',
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent implements OnInit {
 
-  user:User = new User();
+  user: User = new User();
+  token: any = new Array();
 
   loginForm: FormGroup;
 
@@ -43,17 +44,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-    ngOnInit()
-    {
+    ngOnInit() {
       this.authenticationService.logout();
     }
 
-    login()
-    {
+    login() {
       this.loading = true;
       this.authenticationService.login(this.user.loginId, this.user.password)
         .subscribe(
           response => {
+            this.token = response;
+            localStorage.setItem('access_token', this.token.access_token);
+            localStorage.setItem('refresh_token', this.token.refresh_token);
             this.alertService.success('Login Success');
             this.router.navigate(['/']);
             this.loading = true;
@@ -64,6 +66,5 @@ export class LoginComponent implements OnInit {
             this.loading = false;
           });
     }
-
   }
 

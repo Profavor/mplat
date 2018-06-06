@@ -1,7 +1,7 @@
-import { Routes, RouterModule }  from '@angular/router';
-import { Pages } from './pages.component';
+import { Routes, RouterModule } from '@angular/router';
+import { PagesComponent } from './pages.component';
 import { ModuleWithProviders } from '@angular/core';
-import {AuthGuard} from "../auth/auth.guard";
+import {AuthGuard} from '../auth/auth.guard';
 
 export const routes: Routes = [
  {
@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'pages',
-    component: Pages,
+    component: PagesComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },

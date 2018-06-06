@@ -1,8 +1,7 @@
 ﻿import {Injectable} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
-import {ToastrService} from "ngx-toastr";
+import { Observable, Subject } from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class AlertService {
@@ -28,7 +27,7 @@ export class AlertService {
       this.toastrService.success(message);
     }
 
-    error(message: string, keepAfterNavigationChange = false){
+    error(message: string, keepAfterNavigationChange = false) {
       this.toastrService.error(message);
     }
 

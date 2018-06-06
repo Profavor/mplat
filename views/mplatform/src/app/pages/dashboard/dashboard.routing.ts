@@ -1,14 +1,14 @@
-import { Routes, RouterModule }  from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { Dashboard } from './dashboard.component';
+import { DashboardComponent } from './dashboard.component';
 import { ModuleWithProviders } from '@angular/core';
-import {AuthGuard} from "../../auth/auth.guard";
+import {AuthGuard} from '../../auth/auth.guard';
 
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [
   {
     path: '',
-    component: Dashboard
+    component: DashboardComponent
     , canActivate: [AuthGuard]
   }
 ];

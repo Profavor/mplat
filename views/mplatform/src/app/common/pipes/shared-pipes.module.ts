@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DictionaryPipe, ExponentialStrengthPipe} from '.';
-import {DictionaryService} from "../services/dictionary.service";
+import {DictionaryService} from '../services/dictionary.service';
 
-@NgModule({ 
+@NgModule({
       declarations: [
         DictionaryPipe, ExponentialStrengthPipe
       ],
@@ -14,13 +14,11 @@ import {DictionaryService} from "../services/dictionary.service";
         DictionaryPipe, ExponentialStrengthPipe
       ]
 })
-export class SharedPipesModule { 
+export class SharedPipesModule {
     static forRoot() {
         return {
             ngModule: SharedPipesModule,
             providers: [],
         };
      }
-  
-
 }

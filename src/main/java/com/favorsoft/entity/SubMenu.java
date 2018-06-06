@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -58,5 +59,9 @@ public class SubMenu extends BaseEntity implements Serializable {
 	private Menu menu;
 	
 	private int dispSeq;	
+	
+	@JsonManagedReference
+	@ManyToMany(targetEntity=Role.class, fetch=FetchType.EAGER)
+	private Collection<Role> roles;
 	
 }

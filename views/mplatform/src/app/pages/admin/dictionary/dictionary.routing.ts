@@ -1,8 +1,8 @@
-import { Routes, RouterModule }  from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { DictionaryComponent } from './dictionary.component';
 import { ModuleWithProviders } from '@angular/core';
-import {AdminGuard} from "../../../auth";
+import {AdminGuard} from '../../../auth';
 
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [

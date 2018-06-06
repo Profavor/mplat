@@ -1,2 +1,2 @@
-export * from "./dictionary.pipe";
-export * from "./test.pipe";
+export * from './dictionary.pipe';
+export * from './test.pipe';

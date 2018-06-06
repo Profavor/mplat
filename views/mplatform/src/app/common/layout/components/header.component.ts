@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
-import {MenuService} from "../services/menu.service";
-import {AlertService} from "../../services/alert.service";
+import {MenuService} from '../services/menu.service';
+import {AlertService} from '../../services/alert.service';
 import {TranslateService} from '@ngx-translate/core';
 import { Location } from '@angular/common';
 
 declare var $: any;
 
 @Component({
-  selector: 'header',
+  selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.css']
 })
@@ -38,19 +38,19 @@ export class HeaderComponent implements OnInit{
         });
   }
 
-  setLanguage(lang:string){
+  setLanguage(lang: string) {
     localStorage.setItem('langCode', lang);
     this.langCode = lang;
     this.router.navigated = false;
     this.router.navigateByUrl(this.router.url);
   }
 
-  getTopMenu(){
+  getTopMenu() {
     this.menuService.getTopMenu()
     .subscribe(
-      response => {  
-        this.topMenu = response; 
-        if(!this.topMenu.success){
+      response => {
+        this.topMenu = response;
+        if (!this.topMenu.success) {
           this.alertService.error(this.topMenu.message);
         }
       },
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit{
       });
   }
 
-  logout(){
+  logout() {
     this.authenticationService.logout();
   }
 }

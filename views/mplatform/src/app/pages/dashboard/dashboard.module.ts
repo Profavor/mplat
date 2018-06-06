@@ -1,10 +1,10 @@
-import { NgModule }      from '@angular/core';
-import { CommonModule }  from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { Dashboard } from './dashboard.component';
-import { routing }       from './dashboard.routing';
-import {AuthGuard} from "../../auth/auth.guard";
-import {AuthenticationService} from "../../auth/services/authentication.service";
+import { DashboardComponent } from './dashboard.component';
+import { routing } from './dashboard.routing';
+import {AuthGuard} from '../../auth/auth.guard';
+import {AuthenticationService} from '../../auth/services/authentication.service';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import {AuthenticationService} from "../../auth/services/authentication.service"
     routing
   ],
   declarations: [
-    Dashboard
+    DashboardComponent
   ],
   providers: [
     AuthGuard, AuthenticationService

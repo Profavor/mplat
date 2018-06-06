@@ -10,6 +10,6 @@
       this.password = '',
       this.confirmPassword = '',
       this.email = '',
-      this.agree = false
+      this.agree = false;
   }
 }

@@ -17,12 +17,12 @@ import java.io.Serializable;
 public class UsrRole extends BaseEntity implements Serializable, GrantedAuthority {
 
     @Id
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity=Usr.class)
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity=Usr.class, fetch=FetchType.LAZY)
     @JoinColumn(name="usrid", referencedColumnName = "usrid")
     private Usr usr;
 
     @Id
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity=Role.class)
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity=Role.class, fetch=FetchType.LAZY)
     @JoinColumn(name="roleid", referencedColumnName = "roleid")
     private Role role;
 
