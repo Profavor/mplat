@@ -15,5 +15,12 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  	"include": [
+	  "src/**/*"
+	],
+	"files": [
+	  "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxbargauge.ts"
+	]
+
 }
