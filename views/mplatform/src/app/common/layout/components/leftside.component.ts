@@ -8,11 +8,11 @@ declare var $: any;
 
 
 @Component({
-  selector: 'left-side',
+  selector: 'app-leftside',
   templateUrl: 'leftside.component.html',
   styleUrls: ['leftside.component.css']
 })
-export class LeftsideComponent implements OnInit, AfterViewInit{
+export class LeftsideComponent implements OnInit, AfterViewInit {
   sideMenu: any = new Array();
   langCode: string;
 

@@ -1,3 +1,26 @@
-#logo-group{
-    width:244px; height: 50px; position: relative; float: left;
+.logo-group {
+    width:220px; float: left;
+}
+
+.logo-main {
+    padding:5px;
+}
+
+.header-main {
+    margin-left:220px; position: relative;
+}
+
+.header-group {
+    margin-top:-5px; margin-right:5px;
+}
+
+/* 데스크탑 브라우저 가로 */
+@media (max-width : 860px) {
+    .logo-main  {
+       display: none; 
+    }
+
+    .header-main {
+        margin: 5px;
+    }
 }

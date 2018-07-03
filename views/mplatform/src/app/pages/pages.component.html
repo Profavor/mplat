@@ -1,12 +1,16 @@
-<app-header></app-header>
-<div style="margin:5px">
-<left-side></left-side>
+<div class="app-header">
+  <app-header></app-header>
+</div>
+<div class="app-leftside">
+<app-leftside></app-leftside>
 </div>
 
-<div style="margin-left:220px; position: relative; min-height: 300px">
+<div class="app-main">
   <div style="margin:5px">
-  <router-outlet></router-outlet>
-</div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
-<footer></footer>
+<div class="app-fotter">
+  <app-footer></app-footer>
+</div>

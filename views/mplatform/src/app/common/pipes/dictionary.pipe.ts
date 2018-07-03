@@ -14,7 +14,7 @@ export class DictionaryPipe implements PipeTransform {
     private cachedDicId = '';
     private responseData: any = null;
 
-    transform(dicId: string, defaultMessage: string){
+    transform(dicId: string, defaultMessage: string) {
         if (dicId !== this.cachedDicId) {
             this.cachedData = '';
             this.cachedDicId = dicId;

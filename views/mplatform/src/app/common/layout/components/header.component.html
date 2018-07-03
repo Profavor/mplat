@@ -1,5 +1,5 @@
-<div style="padding:5px;">
-        <div class="logo-group" style="width:220px; float: left;">
+<div class="logo-main">
+        <div class="logo-group">
         <span>
                 <h3 class="ui header">
                 <i class="settings icon"></i>
@@ -12,10 +12,15 @@
         </div>
 </div>
 
-<div style="margin-left:220px; position: relative;">
-    <div style="margin-top:-5px; margin-right:5px;">
-        <div class="ui small red menu">     
-                <menu-item *ngFor="let menu of topMenu.obj" [menu]="menu" [langCode]="langCode"></menu-item>
+<div class="header-main">
+    <div class="header-group">
+        <div class="ui small red menu">  
+                <a class="item">
+                        <i class="gamepad icon"></i>
+                  Home
+                </a>
+                                       
+                <app-menu-item *ngFor="let menu of topMenu.obj" [menu]="menu" [langCode]="langCode"></app-menu-item>
                 <div class="right menu">
                         <div class="ui dropdown item" id="language">
                                 <i class="world icon"></i>Language <i class="dropdown icon"></i>

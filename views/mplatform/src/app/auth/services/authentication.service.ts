@@ -2,7 +2,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, retry, map } from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -13,7 +13,6 @@ export class AuthenticationService {
 
   private access_token: string;
   private refresh_token: string;
-  jwtHelper: JwtHelper = new JwtHelper();
 
   /**
    * Authorization OAUTH2 Login Process
@@ -41,7 +40,7 @@ export class AuthenticationService {
     .set('redirect_uri', '/');
 
     return this.http.post('/oauth/token', params, httpOptions)
-      .pipe( retry(3));
+      .pipe();
   }
 
   /**
@@ -76,7 +75,7 @@ export class AuthenticationService {
    * @returns {boolean}
    */
   loggedIn() {
-    return tokenNotExpired('access_token');
+    return !this.isTokenExpired();
   }
 
   /**
@@ -85,7 +84,8 @@ export class AuthenticationService {
    * @returns {any}
    */
   decodeToken() {
-    return this.jwtHelper.decodeToken(this.getAccessToken());
+    const jwtHelper = new JwtHelperService();
+    return jwtHelper.decodeToken(this.getAccessToken());
   }
 
   /**
@@ -94,7 +94,8 @@ export class AuthenticationService {
    * @returns {Date}
    */
   getTokenExpirationDate() {
-    return this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
+    const jwtHelper = new JwtHelperService();
+    return jwtHelper.getTokenExpirationDate(this.getAccessToken());
   }
 
   /**
@@ -103,7 +104,8 @@ export class AuthenticationService {
    * @returns {boolean}
    */
   isTokenExpired() {
-    return this.jwtHelper.isTokenExpired(this.getAccessToken());
+    const jwtHelper = new JwtHelperService();
+    return jwtHelper.isTokenExpired(this.getAccessToken());
   }
 
   jwt() {

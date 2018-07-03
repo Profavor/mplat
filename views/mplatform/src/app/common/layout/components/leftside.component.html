@@ -1,4 +1,4 @@
-<div class="" style="width:210px;position:relative; float: left;">
+<div class="leftside-main">
 
         <div class="ui segment">
             <img class="ui avatar image" src="assets/image/square-image.png">
@@ -12,7 +12,7 @@
                   </div>
         </div>
         <div class="ui vertical pointing menu">
-            <menu-item *ngFor="let menu of sideMenu.obj" [menu]="menu" [langCode]="langCode"></menu-item>
+            <app-menu-item *ngFor="let menu of sideMenu.obj" [menu]="menu" [langCode]="langCode"></app-menu-item>
         </div>
 
 </div>

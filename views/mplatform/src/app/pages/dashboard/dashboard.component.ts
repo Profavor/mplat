@@ -16,8 +16,8 @@ export class DashboardComponent implements OnInit {
       $('.tabular.menu .item').tab();
 
       $('.ui.dropdown')
-      .dropdown({ 
+      .dropdown({
         useLabels: false
       });
-    }y
+    }
   }
