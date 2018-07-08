@@ -8,10 +8,15 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { routing } from './app.routing';
 import {PagesModule} from './pages/pages.module';
-import {HttpModule} from '@angular/http';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {SharedPipesModule} from './common/pipes/shared-pipes.module';
 import { JwtModule} from '@auth0/angular-jwt';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/api/dictionary/', '.json');
+}
 
 const APP_PROVIDERS = [
   GlobalState
@@ -26,10 +31,16 @@ const APP_PROVIDERS = [
     ToastrModule.forRoot(),
     routing,
     PagesModule,
-    HttpModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
     SharedPipesModule.forRoot(),
     JwtModule.forRoot({
       config: {

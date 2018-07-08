@@ -37,6 +37,11 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    	//다국어 요청시 인증안함
+    	if(request.getRequestURI().startsWith("/api/dictionary/")){
+    		filterChain.doFilter(request, response);
+    	}
+    	
         String authToken = request.getHeader(this.tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         

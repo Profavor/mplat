@@ -5,11 +5,13 @@ import { CoffeeComponent } from './coffee.component';
 import { routing } from './coffee.routing';
 import {AuthGuard} from '../../auth/auth.guard';
 import {AuthenticationService} from '../../auth/services/authentication.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
-    routing
+    routing,
+    TranslateModule
   ],
   declarations: [
     CoffeeComponent

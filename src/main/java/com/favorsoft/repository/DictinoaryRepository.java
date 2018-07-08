@@ -10,5 +10,4 @@ import com.favorsoft.entity.Dictionary;
  */
 @Repository
 public interface DictinoaryRepository extends JpaRepository<Dictionary, String> {
-
 }

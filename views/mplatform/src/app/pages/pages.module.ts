@@ -9,12 +9,14 @@ import {AuthGuard} from '../auth/auth.guard';
 import {AuthenticationService} from '../auth/services/authentication.service';
 import {HeaderComponent, LeftsideComponent, FooterComponent, MenuComponent} from '../common/layout';
 import {MenuService} from '../common/layout/services/menu.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule
   ],
   declarations: [PagesComponent, HeaderComponent, LeftsideComponent, FooterComponent, MenuComponent],
   providers: [AuthGuard, AuthenticationService, MenuService]

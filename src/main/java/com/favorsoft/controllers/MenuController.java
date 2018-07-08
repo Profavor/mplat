@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ public class MenuController {
 	@Autowired
 	private SubMenuRepository subMenuRepository;
 	
+	@Cacheable("topMenu")
 	@RequestMapping(value="/getTopMenu", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxModel<Collection<Optional<Menu>>> getTopMenu() {		
@@ -46,6 +48,7 @@ public class MenuController {
 		return ajaxModel;
 	}
 	
+	@Cacheable("subMenu")
 	@RequestMapping(value="/getSideMenu", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxModel<Collection<Optional<SubMenu>>> getSideMenu(@RequestParam(name="path", defaultValue="") String path) {		

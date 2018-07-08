@@ -4,6 +4,7 @@ import {AuthenticationService} from '../../../auth/services/authentication.servi
 import {MenuService} from '../services/menu.service';
 import {AlertService} from '../../services/alert.service';
 import { Location } from '@angular/common';
+import {TranslateService} from '@ngx-translate/core';
 
 declare var $: any;
 
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
     private menuService: MenuService,
     private alertService: AlertService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
   }
 
@@ -37,6 +39,7 @@ export class HeaderComponent implements OnInit {
 
   setLanguage(lang: string) {
     localStorage.setItem('langCode', lang);
+    this.translate.use(lang.toLocaleLowerCase());
     this.langCode = lang;
     this.router.navigated = false;
     this.router.navigateByUrl(this.router.url);

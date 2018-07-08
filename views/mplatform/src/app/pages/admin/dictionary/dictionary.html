@@ -2,7 +2,7 @@
 
   <div class="ui segment">
 
-      <div class="ui equal width grid" *ngIf="popup != 'Y'">
+      <div class="ui equal width grid">
           <div class="column">
               <h4 class="ui header">
                   <i class="world icon"></i>
@@ -22,20 +22,22 @@
                   <div class="active section">다국어설정</div>
                 </div>
           </div>
-      
-
-     
   </div>
 
   <div class="ui segment">  
       <div class="ui right aligned category search">
           <div class="ui icon input">
-            <input class="prompt" type="text" placeholder="Search animals...">
+              <div class="ui input focus">
+                  <input type="text" placeholder="Search..." style="width:30em">
+              </div>
             <i class="search icon"></i>
           </div>
           <div class="results"></div>
         </div>
     <table class="ui selectable celled small table">
+      <colgroup>
+        <col width="80" /><col width="100" /><col width="150" /><col widt h="*" /><col width="100" />
+      </colgroup>
       <thead class="full-width">
         <tr>
           <th> <div class="ui fitted slider checkbox">
@@ -48,53 +50,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let list of dicList.obj">
           <td class="collapsing">
             <div class="ui fitted slider checkbox">
               <input type="checkbox"> <label></label>
             </div>
           </td>
-          <td>John Lilki</td>
-          <td>September 14, 2013</td>
-          <td>jhlilk22@yahoo.com</td>
-          <td><div class="ui small basic icon buttons" style="margin-top:5px">
-            <button class="ui button" data-position="top right" data-tooltip="Add users to your feed"><i class="file icon"></i></button>
-            <button class="ui button" data-position="top right" data-tooltip="Add users to your feed"><i class="save icon"></i></button>     
-          </div></td>
-        </tr>
-        <tr>
-          <td class="collapsing">
-            <div class="ui fitted slider checkbox">
-              <input type="checkbox"> <label></label>
+          <td>{{list.dicId}}</td>
+          <td>
+            {{list.createdDate | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+          <td>
+            <div class="ui message">
+              <div class="header">
+                {{list.dictionaryLang[0].message}}
+              </div>
+              <p> {{list.dictionaryLang[1].message}}</p>
             </div>
           </td>
-          <td>Jamie Harington</td>
-          <td>January 11, 2014</td>
-          <td>jamieharingonton@yahoo.com</td>
-          <td><div class="ui small basic icon buttons" style="margin-top:5px">
-            <button class="ui button" data-position="top right" data-tooltip="Add users to your feed"><i class="file icon"></i></button>
-            <button class="ui button" data-position="top right" data-tooltip="Add users to your feed"><i class="save icon"></i></button>     
-          </div></td>
-        </tr>
-        <tr>
-          <td class="collapsing">
-            <div class="ui fitted slider checkbox">
-              <input type="checkbox"> <label></label>
-            </div>
+          <td>
+            <button class="fluid ui blue button"  data-position="top right" data-tooltip="edit" (click)="showDictionary(list.dicId)">Edit</button>  
           </td>
-          <td>Jill Lewis</td>
-          <td>May 11, 2014</td>
-          <td>jilsewris22@yahoo.com</td>
-          <td><div class="ui small basic icon buttons" style="margin-top:5px">
-            <button class="ui button" data-position="top right" data-tooltip="Add users to your feed"><i class="file icon"></i></button>
-            <button class="ui button" data-position="top right" data-tooltip="Add users to your feed"><i class="save icon"></i></button>     
-          </div></td>
-        </tr>
+        </tr>      
       </tbody>
       <tfoot class="full-width">
         <tr>         
           <th colspan="5">
-            <div class="ui right floated small primary labeled icon button">
+            <div class="ui right floated small primary labeled icon button" (click)="showDictionary('')">
               <i class="user icon"></i> Add Dictinoary
             </div>
             <div class="ui right floated small primary labeled icon button">
@@ -105,17 +86,49 @@
                   <i class="left chevron icon"></i>
                 </a>
                 <a class="item">1</a>
-                <a class="item">2</a>
-                <a class="item">3</a>
-                <a class="item">4</a>
                 <a class="icon item">
                   <i class="right chevron icon"></i>
                 </a>
-              </div>
-        
+              </div>        
           </th>
         </tr>
       </tfoot>
     </table>
   </div>
 </div>
+
+
+<div class="ui modal">
+    <div class="header">다국어 설정</div>
+    <div class="content">
+        <div class="ui attached message">
+            <div class="header">
+              다국어를 등록할 수 있습니다.
+            </div>
+            <p>Multi language support.</p>
+          </div>
+          <form class="ui form attached fluid segment">   
+            <div class="field" [ngClass]="{'error': dic.readonly}">
+                <label>ID</label>
+                <input type="text" placeholder="Enter dictionary ID" [(ngModel)] = "dic.dicId" name = "dicId" [readonly]= "dic.readonly">
+              </div>   
+            <div class="field">
+              <label>Korean</label>
+              <input type="text" placeholder="Enter korean messsage..." [(ngModel)]="dic.message_ko" name = "message_ko">
+            </div>
+            <div class="field">
+              <label>English</label>
+              <input type="text"  placeholder="Enter english message..." [(ngModel)]="dic.message_en" name = "message_en">
+            </div>  
+            <div class="ui blue submit button" (click)="saveDictionary()">저장</div>
+          </form>
+          <div class="ui bottom attached warning message">
+            <i class="icon help"></i>
+            다국어를 등록하기전 이미 등록된 메시지인지 확인해보세요.
+          </div>
+    </div>
+    <div class="actions">
+      <div class="ui cancel button">Close</div>
+    </div>
+  </div>
+

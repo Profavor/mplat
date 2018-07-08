@@ -7,21 +7,17 @@ declare var $: any;
   selector: 'app-menu-item',
   template: `
     <div *ngIf="menu.childMenu.length > 0" class="ui dropdown item">
-      <div *ngFor="let lang of menu.dictionary.dictionaryLang">
-        <label *ngIf="lang.lang == langCode">{{lang.message}} <i class="dropdown icon"></i> </label>
-      </div>
+        <label {{menu.dictionary.dicId | translate}} <i class="dropdown icon"></label>
       <div class="menu">
         <div *ngFor="let child of menu.childMenu">
-          <app-menu-item [menu]="child" [langCode]="langCode"></app-menu-item>
+          <app-menu-item [menu]="child"></app-menu-item>
         </div>
       </div>
     </div>
     <div *ngIf="menu.childMenu.length == 0">
     <div *ngFor="let role of menu.roles">
     <div *ngIf="roles.indexOf(role.roleId) > -1">
-      <div *ngFor="let lang of menu.dictionary.dictionaryLang">
-        <a class="item" *ngIf="lang.lang == langCode" routerLink="{{menu.path}}" routerLinkActive="active">{{lang.message}}</a>
-      </div>
+        <a class="item" routerLink="{{menu.path}}" routerLinkActive="active">{{menu.dictionary.dicId | translate}}</a>
     </div>
     </div>
     </div>
@@ -29,8 +25,7 @@ declare var $: any;
 })
 export class MenuComponent implements OnInit, AfterViewInit {
 
-  @Input('menu') menu: any;
-  @Input('langCode') langCode: string;
+  @Input() menu: any;
 
   roles: any = new Array();
     constructor(
@@ -40,7 +35,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
       this.roles = this.authenticationService.decodeToken().authorities;
-      console.log(this.roles);
     }
 
     ngAfterViewInit() {

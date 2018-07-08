@@ -6,17 +6,21 @@ import { routing } from './dictionary.routing';
 import {AdminGuard} from '../../../auth';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
 import {SharedPipesModule} from '../../../common/pipes/shared-pipes.module';
+import {DictionaryService} from './dictionary.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    SharedPipesModule
+    SharedPipesModule,
+    FormsModule
   ],
   declarations: [
     DictionaryComponent
   ],
   providers: [
-    AdminGuard, AuthenticationService
+    AdminGuard, AuthenticationService, DictionaryService
   ]
 })
 export class DictionaryModule {}

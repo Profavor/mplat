@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Observable } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 import { AuthenticationService } from '../../../auth/services/authentication.service';
+import { Dictionary } from './dictionary.component';
 
 @Injectable()
 export class DictionaryService {
@@ -25,9 +26,22 @@ export class DictionaryService {
     }
 
     getDicionary(dicId: string) {
-        const url = '/api/dictionary/getDictionary';
+        const url = '/api/dictionary/' + dicId;
         const param =  new HttpParams();
         param.set('dicId', dicId);
+        return this.http.post(url, param, this.authenticationService.jwt())
+            .pipe(
+                retry(3)
+        );
+    }
+
+    saveDictionary(dic: Dictionary) {
+        const url = '/api/dictionary/save';
+        const param =  new HttpParams()
+            .set('dicId', dic.dicId)
+            .set('message_ko', dic.message_ko)
+            .set('message_en', dic.message_en);
+
         return this.http.post(url, param, this.authenticationService.jwt())
             .pipe(
                 retry(3)
