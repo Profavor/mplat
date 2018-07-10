@@ -1,6 +1,8 @@
-import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, ElementRef, Input, Output, EventEmitter} from '@angular/core';
 import {AlertService} from '../../../common/services/alert.service';
 import {DictionaryService} from './dictionary.service';
+import {TranslateService} from '@ngx-translate/core';
+
 declare var $: any;
 
 export class Dictionary {
@@ -27,10 +29,15 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
   dic: Dictionary = new Dictionary();
   dicList: any = new Array();
   dicObj: any = new Array();
+  selectedValue: any = new Array();
+  p: Number = 0;
+  pageSize: Number = 2;
+  totalCount: Number = 0;
 
   constructor(
     private alertService: AlertService,
-    private dictionaryService: DictionaryService) { }
+    private dictionaryService: DictionaryService,
+    private translate: TranslateService) { }
 
     ngOnInit() {
       this.dic = new Dictionary();
@@ -38,15 +45,36 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
       this.getList();
+
+      $('#allCheck')
+        .checkbox({
+          // check all children
+          onChecked: function() {
+           const $childCheckbox  = $('.checkbox');
+           $childCheckbox.checkbox('check');
+          },
+          // uncheck all children
+          onUnchecked: function() {
+            const $childCheckbox  = $('.checkbox');
+            $childCheckbox.checkbox('uncheck');
+          }
+      });
+    }
+
+    onPageChange(e)  {
+      this.getList();
     }
 
     getList() {
-      this.dictionaryService.getDictionaryList().subscribe(
+      this.dictionaryService.getDictionaryList(this.pageSize, this.p).subscribe(
         response => {
           this.dicList = response;
           if (!this.dicList.success) {
             this.alertService.error(this.dicList.message);
           }
+          this.dicList = this.dicList.obj;
+          this.pageSize = this.dicList.size;
+          this.totalCount = this.dicList.totalElements;
         },
         error => {
           console.log(error);
@@ -89,15 +117,64 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
   saveDictionary() {
     this.dictionaryService.saveDictionary(this.dic).subscribe(
       response => {
-        this.dicList = response;
-        if (!this.dicList.success) {
-          this.alertService.error(this.dicList.message);
+        let message = '';
+        this.translate.get('SUCCESSMSG').subscribe((res: string) => {
+          message = res;
+        });
+        this.dicObj = response;
+        if (!this.dicObj.success) {
+          this.alertService.error(this.dicObj.message);
+        } else {
+          this.alertService.success(message);
+          this.getList();
+          $('.modal').modal('hide');
         }
-        this.alertService.success('Success!!');
-        this.getList();
       },
       error => {
         console.log(error);
       });
   }
+
+  deleteDictionary() {
+    let message = '';
+    this.selectedValue = new Array();
+    const array = new Array();
+    $('input[name=checkedValue]:checked').each(function() {
+      array.push($(this).val());
+    });
+    this.selectedValue = array;
+    this.translate.get('DELETEMSG').subscribe((res: string) => {
+      message = res;
+    });
+
+    if (array.length === 0) {
+      return;
+    }
+
+    if (confirm(message)) {
+        this.dictionaryService.deleteDictionary(array).subscribe(
+          response => {
+            if (!this.dicList.success) {
+              this.alertService.error(this.dicList.message);
+            }
+            this.translate.get('SUCCESSMSG').subscribe((res: string) => {
+              message = res;
+            });
+            this.alertService.success(message);
+            this.getList();
+          },
+          error => {
+            console.log(error);
+          });
+    }
+  }
+
+  selectData(obj: any) {
+    if ($(obj).closest().find('.checkbox').checkbox('is checked')) {
+      $(obj).closest().find('.checkbox').checkbox('uncheck');
+    } else {
+      $(obj).closest().find('.checkbox').checkbox('check');
+    }
+  }
+
 }

@@ -9,11 +9,13 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.favorsoft.common.AjaxModel;
@@ -28,7 +30,7 @@ public class DictionaryController {
 	@Autowired
 	private DictinoaryRepository dictinoaryRepository;
 	
-	@Cacheable("dictionary")
+//	@Cacheable("dictionary")
 	@RequestMapping(value="/{lang}.json", method = {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public Map<String, String> getLang(@PathVariable String lang) {		
@@ -47,10 +49,10 @@ public class DictionaryController {
 	
 	@RequestMapping(value="/getList", method = {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public AjaxModel<Collection<Dictionary>> getList() {	
-		AjaxModel<Collection<Dictionary>> model = new AjaxModel<Collection<Dictionary>>();
+	public AjaxModel<Page<Dictionary>> getList(Pageable pageable) {	
+		AjaxModel<Page<Dictionary>> model = new AjaxModel<Page<Dictionary>>();
 		try {
-			Collection<Dictionary> list = dictinoaryRepository.findAll();
+			Page<Dictionary> list = dictinoaryRepository.findAll(pageable);
 			model.setSuccess(true);
 			model.setObj(list);
 		} catch(Exception e) {
@@ -123,5 +125,25 @@ public class DictionaryController {
 		}
 		
 		return model;
-	}	
+	}
+	
+	@RequestMapping(value="/delete", method = {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public AjaxModel<Optional<Dictionary>> deleteDictionary(@RequestParam String dicId) {	
+		AjaxModel<Optional<Dictionary>> model = new AjaxModel<Optional<Dictionary>>();
+		try {
+			String[] dicIds = dicId.split(",");
+			for(String temp : dicIds) {
+				Optional<Dictionary> obj = dictinoaryRepository.findById(temp);
+				if(obj.isPresent()) {
+					dictinoaryRepository.delete(obj.get());
+				}				
+			}			
+			model.setSuccess(true);
+		} catch(Exception e) {
+			model.setMessage(e.getMessage());
+		}
+		
+		return model;
+	}
 }

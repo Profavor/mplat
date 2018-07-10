@@ -8,13 +8,17 @@ import {AuthenticationService} from '../../../auth/services/authentication.servi
 import {SharedPipesModule} from '../../../common/pipes/shared-pipes.module';
 import {DictionaryService} from './dictionary.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import {SuiPaginationModule} from 'ng2-semantic-ui';
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
     SharedPipesModule,
-    FormsModule
+    FormsModule,
+    TranslateModule,
+    SuiPaginationModule
   ],
   declarations: [
     DictionaryComponent

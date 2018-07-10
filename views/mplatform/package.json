@@ -29,6 +29,7 @@
     "datatables": "^1.10.18",
     "intl": "^1.2.5",
     "jquery": "^3.3.1",
+    "ng2-semantic-ui": "^0.9.7",
     "ngx-toastr": "^8.8.0",
     "npm": "^6.1.0",
     "rxjs": "^6.2.1",

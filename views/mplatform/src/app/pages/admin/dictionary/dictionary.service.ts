@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 import { AuthenticationService } from '../../../auth/services/authentication.service';
 import { Dictionary } from './dictionary.component';
+import { stringify } from '../../../../../node_modules/@angular/compiler/src/util';
 
 @Injectable()
 export class DictionaryService {
@@ -13,11 +14,12 @@ export class DictionaryService {
 
         }
 
-    getDictionaryList() {
+    getDictionaryList(pageSize: any, page: any) {
         const url = '/api/dictionary/getList';
-        const param =  new HttpParams();
-        // 페이지 번호
-        //
+        const param =  new HttpParams()
+            .set('size', stringify(pageSize))
+            .set('page', stringify(page - 1))
+            .set('sort', 'createdDate,desc');
 
         return this.http.post(url, param, this.authenticationService.jwt())
             .pipe(
@@ -41,6 +43,17 @@ export class DictionaryService {
             .set('dicId', dic.dicId)
             .set('message_ko', dic.message_ko)
             .set('message_en', dic.message_en);
+
+        return this.http.post(url, param, this.authenticationService.jwt())
+            .pipe(
+                retry(3)
+        );
+    }
+
+    deleteDictionary(array: Array<string>) {
+        const url = '/api/dictionary/delete';
+        const param =  new HttpParams()
+            .set('dicId', array.toString());
 
         return this.http.post(url, param, this.authenticationService.jwt())
             .pipe(
