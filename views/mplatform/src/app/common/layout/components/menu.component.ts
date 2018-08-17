@@ -1,26 +1,27 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
+import {TranslateService} from '@ngx-translate/core';
 
 declare var $: any;
 
 @Component({
   selector: 'app-menu-item',
   template: `
-    <div *ngIf="menu.childMenu.length > 0" class="ui dropdown item">
-        <label {{menu.dictionary.dicId | translate}} <i class="dropdown icon"></label>
-      <div class="menu">
+  <div *ngIf="menu.childMenu.length > 0" class="ui dropdown item">
+    <label> {{menu.dictionary.dicId | translate}} <i class="dropdown icon"></i> </label>
+    <div class="menu">
         <div *ngFor="let child of menu.childMenu">
-          <app-menu-item [menu]="child"></app-menu-item>
+            <app-menu-item [menu]="child"></app-menu-item>
         </div>
-      </div>
     </div>
-    <div *ngIf="menu.childMenu.length == 0">
+  </div>
+  <div *ngIf="menu.childMenu.length == 0">
     <div *ngFor="let role of menu.roles">
-    <div *ngIf="roles.indexOf(role.roleId) > -1">
-        <a class="item" routerLink="{{menu.path}}" routerLinkActive="active">{{menu.dictionary.dicId | translate}}</a>
+        <div *ngIf="roles.indexOf(role.roleId) > -1">
+            <a class="item" routerLink="{{menu.path}}" routerLinkActive="active">{{menu.dictionary.dicId | translate}}</a>
+        </div>
     </div>
-    </div>
-    </div>
+  </div>
   `
 })
 export class MenuComponent implements OnInit, AfterViewInit {
@@ -29,7 +30,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   roles: any = new Array();
     constructor(
-      private authenticationService: AuthenticationService
+      private authenticationService: AuthenticationService,
+      private translate: TranslateService
       ) {
       }
 

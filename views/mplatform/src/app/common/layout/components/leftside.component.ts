@@ -20,13 +20,6 @@ export class LeftsideComponent implements OnInit, AfterViewInit {
     private router: Router,
     private alertService: AlertService,
     private menuService: MenuService) {
-      const _this = this;
-
-      this.router.events.subscribe(function (s) {
-        if (s instanceof NavigationEnd && s.urlAfterRedirects.startsWith('/pages/')) {
-          _this.getMenuList(s.urlAfterRedirects);
-        }
-      });
   }
 
   getMenuList(url: string) {
@@ -53,7 +46,7 @@ export class LeftsideComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
+    $('.ui.dropdown').dropdown();
   }
 
   logout() {

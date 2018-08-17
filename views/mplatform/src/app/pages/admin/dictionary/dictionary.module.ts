@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DictionaryComponent } from './dictionary.component';
+import { DictionaryEditComponent } from './dictionary.edit.component';
 import { routing } from './dictionary.routing';
 import {AdminGuard} from '../../../auth';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
@@ -9,7 +10,7 @@ import {SharedPipesModule} from '../../../common/pipes/shared-pipes.module';
 import {DictionaryService} from './dictionary.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import {SuiPaginationModule} from 'ng2-semantic-ui';
+import {SuiPaginationModule, SuiSelectModule} from 'ng2-semantic-ui';
 
 @NgModule({
   imports: [
@@ -18,10 +19,10 @@ import {SuiPaginationModule} from 'ng2-semantic-ui';
     SharedPipesModule,
     FormsModule,
     TranslateModule,
-    SuiPaginationModule
+    SuiPaginationModule, SuiSelectModule
   ],
   declarations: [
-    DictionaryComponent
+    DictionaryComponent, DictionaryEditComponent
   ],
   providers: [
     AdminGuard, AuthenticationService, DictionaryService

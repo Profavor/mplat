@@ -12,6 +12,10 @@ import java.io.Serializable;
 @Entity
 @Table(name="role")
 public class Role extends BaseEntity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "roleid", length = 20)
 	private String roleId;

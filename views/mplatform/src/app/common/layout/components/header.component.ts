@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
 import {MenuService} from '../services/menu.service';
@@ -13,7 +13,7 @@ declare var $: any;
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -30,11 +30,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
       this.getTopMenu();
+  }
 
-      $('.ui.dropdown')
-        .dropdown({
-          transition: 'drop'
-        });
+  ngAfterViewInit() {
+    $('.ui.dropdown').dropdown();
   }
 
   setLanguage(lang: string) {
