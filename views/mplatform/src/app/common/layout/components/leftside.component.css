@@ -1,3 +1,11 @@
 .leftside-main {
     width:210px; position:relative; float: left;
 }
+
+
+/* 데스크탑 브라우저 가로 */
+@media (max-width : 860px) {
+    .leftside-main  {
+       display: none; 
+    }
+}

@@ -31,7 +31,7 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
   dicObj: any = new Array();
   selectedValue: any = new Array();
   p: Number = 0;
-  pageSize: Number = 2;
+  pageSize: Number = 5;
   totalCount: Number = 0;
 
   constructor(
