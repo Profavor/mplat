@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.favorsoft.common.AjaxModel;
 import com.favorsoft.entity.Dictionary;
 import com.favorsoft.entity.DictionaryLang;
+import com.favorsoft.repository.DictinoaryLangRepository;
 import com.favorsoft.repository.DictinoaryRepository;
 
 @Controller
@@ -49,10 +50,15 @@ public class DictionaryController {
 	
 	@RequestMapping(value="/getList", method = {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public AjaxModel<Page<Dictionary>> getList(Pageable pageable) {	
+	public AjaxModel<Page<Dictionary>> getList(@RequestParam String message, Pageable pageable) {	
 		AjaxModel<Page<Dictionary>> model = new AjaxModel<Page<Dictionary>>();
 		try {
-			Page<Dictionary> list = dictinoaryRepository.findAll(pageable);
+			Page<Dictionary> list = null;
+			if ("".equals(message)) {
+		       list = this.dictinoaryRepository.findAll(pageable);
+		    } else {
+		       list = this.dictinoaryRepository.findByMessageLike(message, pageable);
+		    }			
 			model.setSuccess(true);
 			model.setObj(list);
 		} catch(Exception e) {

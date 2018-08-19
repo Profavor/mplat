@@ -14,9 +14,10 @@ export class DictionaryService {
 
         }
 
-    getDictionaryList(pageSize: any, page: any) {
+    getDictionaryList(message: string, pageSize: any, page: any) {
         const url = '/api/dictionary/getList';
         const param =  new HttpParams()
+            .set('message', message)
             .set('size', stringify(pageSize))
             .set('page', stringify(page - 1))
             .set('sort', 'createdDate,desc');

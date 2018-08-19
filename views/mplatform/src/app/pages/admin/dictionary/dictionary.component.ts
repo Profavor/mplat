@@ -33,6 +33,7 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
   p: Number = 0;
   pageSize: Number = 5;
   totalCount: Number = 0;
+  message = '';
 
   constructor(
     private alertService: AlertService,
@@ -65,8 +66,15 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
       this.getList();
     }
 
+    search(e) {
+      if (e.key === "Enter") {
+        this.getList();
+      }      
+    }
+
     getList() {
-      this.dictionaryService.getDictionaryList(this.pageSize, this.p).subscribe(
+      console.log(this.message);
+      this.dictionaryService.getDictionaryList(this.message, this.pageSize, this.p).subscribe(
         response => {
           this.dicList = response;
           if (!this.dicList.success) {

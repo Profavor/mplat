@@ -28,7 +28,7 @@
       <div class="ui right aligned category search">
           <div class="ui icon input">
               <div class="ui input focus">
-                  <input type="text" placeholder="Search..." style="width:30em">
+                  <input type="text" placeholder="Search..." style="width:30em" [(ngModel)]="message" (keydown)="search($event)">
               </div>
             <i class="search icon"></i>
           </div>

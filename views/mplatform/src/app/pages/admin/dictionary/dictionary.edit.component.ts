@@ -33,6 +33,7 @@ export class DictionaryEditComponent implements OnInit, AfterViewInit {
   p: Number = 0;
   pageSize: Number = 2;
   totalCount: Number = 0;
+  message = '';
 
   constructor(
     private alertService: AlertService,
@@ -65,8 +66,12 @@ export class DictionaryEditComponent implements OnInit, AfterViewInit {
       this.getList();
     }
 
+    search() {
+      this.getList();
+    }
+
     getList() {
-      this.dictionaryService.getDictionaryList(this.pageSize, this.p).subscribe(
+      this.dictionaryService.getDictionaryList(this.message, this.pageSize, this.p).subscribe(
         response => {
           this.dicList = response;
           if (!this.dicList.success) {
