@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DictionaryComponent } from './dictionary.component';
-import { DictionaryEditComponent } from './dictionary.edit.component';
 import { routing } from './dictionary.routing';
 import {AdminGuard} from '../../../auth';
 import {AuthenticationService} from '../../../auth/services/authentication.service';
@@ -22,7 +21,7 @@ import {SuiPaginationModule, SuiSelectModule} from 'ng2-semantic-ui';
     SuiPaginationModule, SuiSelectModule
   ],
   declarations: [
-    DictionaryComponent, DictionaryEditComponent
+    DictionaryComponent
   ],
   providers: [
     AdminGuard, AuthenticationService, DictionaryService

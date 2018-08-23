@@ -1,0 +1,53 @@
+<div class="ui segment">
+    <div class="ui right aligned category search">
+        <div class="ui icon input">
+            <div class="ui input focus">
+                <input type="text" placeholder="Search..." style="width:30em" [(ngModel)]="message" (keydown)="search($event)">
+            </div>
+          <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+  <table class="ui selectable celled small table">
+    <colgroup>
+      <col width="100" /><col width="150" /><col width="*" /><col width="100" />
+    </colgroup>
+    <thead class="full-width">
+      <tr>
+        <th>ID</th>
+        <th>Registration Date</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of dicList.content">
+        <td>{{list.dicId}}</td>
+        <td>
+          {{list.createdDate | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+        <td (click)="selectData(row)" #row>
+          <div class="ui message">
+            <div class="header">
+              {{list.dictionaryLang[0].message}}
+            </div>
+            <p> {{list.dictionaryLang[1].message}}</p>
+          </div>
+        </td>
+        <td>
+          <button class="fluid ui blue button"  data-position="top right" data-tooltip="edit" (click)= "selectDictionary(list.dicId)">Select</button>  
+        </td>
+      </tr>      
+    </tbody>
+    <tfoot class="full-width">
+      <tr>
+            <th colspan="4">
+          <sui-pagination [collectionSize]="totalCount"
+                      [pageSize]="pageSize"
+                      [hasBoundaryLinks]="true"
+                      [(page)]="p" (pageChange)="onPageChange($event)">
+        </sui-pagination> 
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

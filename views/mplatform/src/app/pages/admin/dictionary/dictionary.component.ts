@@ -73,7 +73,6 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
     }
 
     getList() {
-      console.log(this.message);
       this.dictionaryService.getDictionaryList(this.message, this.pageSize, this.p).subscribe(
         response => {
           this.dicList = response;
@@ -183,6 +182,10 @@ export class DictionaryComponent implements OnInit, AfterViewInit {
     } else {
       $(obj).closest().find('.checkbox').checkbox('check');
     }
+  }
+
+  test(e){
+    console.log(e);
   }
 
 }
