@@ -1,0 +1,43 @@
+<div class="ui segments">
+
+    <div class="ui segment">
+  
+        <div class="ui equal width grid">
+            <div class="column">
+                <h4 class="ui header">
+                    <i class="world icon"></i>
+                    <div class="content">
+                       메뉴설정
+                    </div>
+                  </h4>
+            </div>
+            <div class="column right aligned ">
+                <div class="ui small breadcrumb">
+                    <a class="section">Home</a>
+                    <i class="right chevron icon divider"></i>
+                    <a class="section">admin</a>
+                    <i class="right chevron icon divider"></i>
+                    <a class="section">Settings</a>
+                    <i class="right chevron icon divider"></i>
+                    <div class="active section">메뉴설정</div>
+                  </div>
+            </div>
+    </div>
+  
+    <div class="ui segment">
+        <div class="ui horizontal segments">
+            <div class="ui segment">
+                <app-menu-level [title]="menu1" [level]="1"></app-menu-level>
+            </div>
+            <div class="ui segment">
+                <app-menu-level [title]="menu1" [level]="2"></app-menu-level>
+            </div>
+            <div class="ui segment">
+                <app-menu-level [title]="menu1" [level]="3"></app-menu-level>
+            </div>
+        </div>
+    
+    </div>
+       
+  </div>
+  

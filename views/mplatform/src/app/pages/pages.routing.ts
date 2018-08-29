@@ -19,6 +19,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
       { path: 'admin/settings/dictionary', loadChildren: './admin/dictionary/dictionary.module#DictionaryModule' },
+      { path: 'admin/settings/menu', loadChildren: './admin/menu/menu.module#MenuModule' },
       { path: 'coffee', loadChildren: './coffee/coffee.module#CoffeeModule' }
     ]
   }
