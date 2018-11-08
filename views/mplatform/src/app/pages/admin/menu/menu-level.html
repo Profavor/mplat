@@ -22,13 +22,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let menu of menuObj.obj; let i = index">
         <td>
-            <div class="ui message">
+            <div class="ui message" [ngClass]="{'positive': i==selectedLevel}" (click)="setActive(i)">
                 <div class="header">
-                  Changes in Service
+                  {{menu.dictionary.dicId | translate}}
                 </div>
-                <p>We just updat.</p>
+                <p>{{menu.path}}</p>
               </div>
         </td>
         <td>

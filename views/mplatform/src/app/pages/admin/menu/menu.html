@@ -26,14 +26,14 @@
   
     <div class="ui segment">
         <div class="ui horizontal segments">
-            <div class="ui segment">
-                <app-menu-level [title]="menu1" [level]="1"></app-menu-level>
+            <div class="ui segment" style="width:20em">
+                <app-menu-level [title]="menu1" [level]="1" (selectEvent)="selectLevel1($event)" #level1></app-menu-level>
             </div>
-            <div class="ui segment">
-                <app-menu-level [title]="menu1" [level]="2"></app-menu-level>
+            <div class="ui segment" style="width:20em">
+                <app-menu-level [title]="menu1" [level]="2" (selectEvent)="selectLevel2($event)" #level2></app-menu-level>
             </div>
-            <div class="ui segment">
-                <app-menu-level [title]="menu1" [level]="3"></app-menu-level>
+            <div class="ui segment" style="width:20em">
+                <app-menu-level [title]="menu1" [level]="3"  #level3></app-menu-level>
             </div>
         </div>
     

@@ -48,6 +48,26 @@ public class MenuController {
 		return ajaxModel;
 	}
 	
+	@RequestMapping(value="/getTopMenuByParentId", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxModel<Collection<Optional<Menu>>> getTopMenuByParentId(@RequestParam String parentId) {		
+		AjaxModel<Collection<Optional<Menu>>> ajaxModel = new AjaxModel<>();		
+		try {
+			Optional<Menu> menu =  menuRepository.findById(parentId);
+			if(menu.isPresent()) {				 
+				ajaxModel.setObj(menuRepository.findByParentId(menu.get().getId()));	
+			}else {
+				throw new Exception("Cannot find parent menu id->"+parentId);
+			}			
+			ajaxModel.setSuccess(true);
+		}catch(Exception e) {
+			ajaxModel.setSuccess(false);
+			ajaxModel.setMessage(e.getMessage());
+		}
+		
+		return ajaxModel;
+	}
+	
 	@Cacheable("subMenu")
 	@RequestMapping(value="/getSideMenu", method = RequestMethod.POST)
 	@ResponseBody
